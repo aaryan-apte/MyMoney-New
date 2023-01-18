@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_money/pages/homepage/incometoptabs.dart';
 import 'package:my_money/pages/login.dart';
 import 'package:my_money/pages/signup/home1.dart';
 import 'package:my_money/pages/signup/register.dart';
 import 'package:my_money/pages/signup/input.dart';
+import 'package:my_money/pages/homepage/expensetoptabs.dart';
 
 Color PrimaryColor = Color(0xff109618);
 
@@ -29,14 +31,14 @@ class _MyHomePageState extends State<MyLogin> {
           setState(() {
           switch(index){
             case 0:
-              PrimaryColor=Color(0xffff5722);
+              PrimaryColor=Color(0xffe91e63);
               break;
               case 1:
                 PrimaryColor=Color(0xff3f51b5);
                 break;
-              case 2:
-                PrimaryColor=Color(0xffe91e63);
-                break;    
+              //case 2:
+                //PrimaryColor=Color(0xffe91e63);
+                //break;    
             default:    
           }
           });
@@ -61,7 +63,11 @@ class _MyHomePageState extends State<MyLogin> {
       ),
     ),
     body: TabBarView(
-      children: [],
+      children:<Widget> [
+      
+        ExpenseTopTabs(0xffe91e63),
+        IncomeTopTabs(0xff3f51b5)
+      ],
     )
     ),);
   }
