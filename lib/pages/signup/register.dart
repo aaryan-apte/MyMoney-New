@@ -3,11 +3,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/gestures.dart';
+// import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:my_money/backend/services/auth.dart';
-import 'package:my_money/pages/signup/login.dart';
-import 'package:my_money/pages/signup/input.dart';
+// import 'package:my_money/backend/services/auth.dart';
+// import 'package:my_money/pages/signup/login.dart';
+// import 'package:my_money/pages/signup/input.dart';
 
 class MyRegister extends StatefulWidget {
   // final VoidCallback onClickedSignIn;
@@ -21,12 +21,14 @@ class _MyRegisterState extends State<MyRegister> {
 
   final database = FirebaseDatabase.instance;
 
-  final AuthService _auth = AuthService();
+  // final AuthService _auth = AuthService();
   final formKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
+
+  DatabaseReference ref = FirebaseDatabase.instance.ref();
 
   // void dispose() {
   //   emailController.dispose();
@@ -43,13 +45,13 @@ class _MyRegisterState extends State<MyRegister> {
       return;
     }
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (context) => Center(
+    //     child: CircularProgressIndicator(),
+    //   ),
+    // );
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),

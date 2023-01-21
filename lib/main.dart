@@ -11,7 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:my_money/pages/signup/utils.dart';
 // import 'package:my_money/pages/signup/utils.dart';
 
-import 'backend/authentication/authenticate2.dart';
+import 'backend/authentication/authenticate.dart';
 
 // import 'package:my_money/enter_amount_page.dart';
 // import 'package:my_money/nav_pages/main_page.dart';
