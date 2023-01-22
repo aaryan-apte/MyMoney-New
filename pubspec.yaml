@@ -1,7 +1,7 @@
 name: my_money
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -18,31 +18,24 @@ dependencies:
   firebase_core: ^2.4.1
   email_validator: ^2.1.17
   firebase_database: ^10.0.9
+  masonry_grid: ^1.0.0
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/expense_icons/
+    - assets/income_icons/
+    - assets/budget_icons/
+    - assets/goals_icon/
 
   fonts:
     - family: CrimsonText

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_money/pages/homepage/home_page.dart';
+import 'package:my_money/pages/homepage/nav_tab_page.dart';
 
 import '../../pages/signup/login.dart';
 

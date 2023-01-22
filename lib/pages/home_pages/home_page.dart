@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:my_money/pages/home_pages/expensetoptabs.dart';
 import 'package:my_money/pages/home_pages/incometoptabs.dart';
@@ -26,19 +28,26 @@ class _MyHomePageState extends State<MyHomePage> {
       body: DefaultTabController(
         length: 5,
         child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: PrimaryColor,
-              title: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Center(
-                      child: Text("You have saved 1000 up till now!",
-                          style: TextStyle(fontSize: 10)))),
-              bottom: TabBar(
-                isScrollable: true,
-                indicatorColor: Colors.white,
-                indicatorWeight: 6.0,
-                onTap: (index) {
-                  setState(() {
+          appBar: AppBar(
+            backgroundColor: PrimaryColor,
+            // title: Padding(
+            //   padding: EdgeInsets.only(top: 8.0),
+            //   child: Center(
+            //     child: Text(
+            //       "You have saved 1000 up till now!",
+            //       style: TextStyle(
+            //         fontSize: 10,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            bottom: TabBar(
+              isScrollable: true,
+              indicatorColor: Colors.white,
+              indicatorWeight: 6.0,
+              onTap: (index) {
+                setState(
+                  () {
                     switch (index) {
                       case 0:
                         PrimaryColor = Color(0xffe91e63);
@@ -51,36 +60,37 @@ class _MyHomePageState extends State<MyHomePage> {
                       //break;
                       default:
                     }
-                  });
-                },
-                tabs: <Widget>[
-                  Tab(
-                    child: Container(
-                      child: Text(
-                        'EXPENSE',
-                        style: TextStyle(color: Colors.white, fontSize: 18.0),
-                      ),
-                    ),
+                  },
+                );
+              },
+              tabs: const [
+                Tab(
+                  child: Text(
+                    'EXPENSE',
+                    style: TextStyle(color: Colors.white, fontSize: 18.0),
                   ),
-                  Tab(
-                    child: Container(
-                      child: Text(
-                        'INCOME',
-                        style: TextStyle(color: Colors.white, fontSize: 18.0),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                SizedBox(
+                  width: 17.0,
+                ),
+                Tab(
+                  child: Text(
+                    'INCOME',
+                    style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  ),
+                )
+              ],
             ),
-            body: SafeArea(
-              child: TabBarView(
-                children: <Widget>[
-                  ExpenseTopTabs(0xffe91e63),
-                  IncomeTopTabs(0xff3f51b5)
-                ],
-              ),
-            )),
+          ),
+          body: SafeArea(
+            child: TabBarView(
+              children: <Widget>[
+                ExpenseTopTabs(0xffe91e63),
+                IncomeTopTabs(0xff3f51b5)
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

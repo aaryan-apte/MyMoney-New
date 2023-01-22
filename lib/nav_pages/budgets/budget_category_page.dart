@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:my_money/enter_amount_page.dart';
+import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
 
-class ExpenseCategory extends StatefulWidget {
+class BudgetCategory extends StatefulWidget {
   @override
-  _ExpenseCategoryState createState() => _ExpenseCategoryState();
+  _BudgetCategoryState createState() => _BudgetCategoryState();
 }
 
-class _ExpenseCategoryState extends State<ExpenseCategory> {
+class _BudgetCategoryState extends State<BudgetCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
+        title: Text("Select the category"),
+      ),
+      backgroundColor: Colors.lightBlueAccent,
       body: Container(
         child: Column(children: [
-          Container(
-            height: 200,
-            decoration: const BoxDecoration(
-                color: Color(0xffe91e63),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(60),
-                  bottomLeft: Radius.circular(60),
-                )),
-          ),
+          /*  Container(
+                height: 200,
+                decoration: const BoxDecoration(
+                    color: Color(0xffe91e63),
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(60),
+                      bottomLeft: Radius.circular(60),)
+                ),
+              ),*/
           const SizedBox(height: 20),
           Container(
-            height: 570,
+            height: 670,
             decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -183,7 +187,8 @@ class _ExpenseCategoryState extends State<ExpenseCategory> {
   TextButton IconGenerator(String img, String txt) {
     return TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, 'amount');
+          // EnterBudgetAmount()
+          Navigator.pushNamed(context, 'budgetlimit');
         },
         child: Column(
           children: [

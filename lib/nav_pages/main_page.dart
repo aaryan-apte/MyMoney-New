@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_money/pages/home_pages/home_page.dart';
-import 'package:my_money/nav_pages/records_page.dart';
-import 'package:my_money/nav_pages/budgets_page.dart';
-import 'package:my_money/nav_pages/goals_page.dart';
+import 'package:my_money/nav_pages/records/records_page.dart';
+import 'package:my_money/nav_pages/budget/budgets_page.dart';
+import 'package:my_money/nav_pages/goals/goals_page.dart';
 /*import 'package:my_money/pages/homepage/incometoptabs.dart';
 import 'package:my_money/pages/login.dart';
 import 'package:my_money/pages/signup/home1.dart';

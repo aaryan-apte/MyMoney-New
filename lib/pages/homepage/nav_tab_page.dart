@@ -1,15 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_money/pages//home_pages/home_page.dart';
-import 'package:my_money/nav_pages/records_page.dart';
-import 'package:my_money/nav_pages/budgets_page.dart';
-import 'package:my_money/nav_pages/goals_page.dart';
-/*import 'package:my_money/pages/homepage/incometoptabs.dart';
-import 'package:my_money/pages/login.dart';
-import 'package:my_money/pages/signup/home1.dart';
-import 'package:my_money/pages/signup/register.dart';
-import 'package:my_money/pages/signup/input.dart';
-import 'package:my_money/pages/homepage/expensetoptabs.dart';*/
+import 'package:my_money/nav_pages/records/records_page.dart';
+import 'package:my_money/nav_pages/budget/budgets_page.dart';
+import 'package:my_money/nav_pages/goals/goals_page.dart';
 
 Color PrimaryColor = Color(0xff109618);
 
@@ -118,7 +112,7 @@ class _MainPageState extends State<MainPage> {
 //                     //break;
 //                     default:
 //                   }
-//                 });
+//                 },);
 //               },
 //               tabs: <Widget>[
 //                 Tab(
@@ -145,7 +139,7 @@ class _MainPageState extends State<MainPage> {
 //               ExpenseTopTabs(0xffe91e63),
 //               IncomeTopTabs(0xff3f51b5)
 //             ],
-//           )),
+//           ),),
 //
 //     );
 //   }

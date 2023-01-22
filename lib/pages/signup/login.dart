@@ -118,18 +118,18 @@ class _MyLogin1State extends State<MyLogin> {
               SizedBox(
                 height: 20.0,
               ),
-              GestureDetector(
-                child: Text(
-                  'Forgot Password?',
-                  style: TextStyle(color: Colors.white, fontSize: 15.0),
-                ),
-                onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordPage()));
-                },
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
+              // GestureDetector(
+              //   child: Text(
+              //     'Forgot Password?',
+              //     style: TextStyle(color: Colors.white, fontSize: 15.0),
+              //   ),
+              //   onTap: () {
+              //     // Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordPage()));
+              //   },
+              // ),
+              // SizedBox(
+              //   height: 15.0,
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

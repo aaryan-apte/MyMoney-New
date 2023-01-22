@@ -36,60 +36,143 @@ class _IncomeTopTabsState extends State<IncomeTopTabs>
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              indicatorColor: Color(0xff3f51b5),
-              indicatorWeight: 4.0,
-              unselectedLabelColor: Colors.grey,
-              tabs: <Widget>[
-                Tab(
-                  child: Text(
-                    'Day',
-                    style: TextStyle(
-                        color: _tabController.index == 0
-                            ? Color(widget.colorVal)
-                            : Colors.grey),
+        // appBar: AppBar(
+        //   title: Text(
+        //     'Tab bar',
+        //   ),
+        // ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              // give the tab bar a height [can change hheight to preferred height]
+              Container(
+                margin: EdgeInsets.only(top: 7.0),
+                height: 45,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(
+                    25.0,
                   ),
                 ),
-                Tab(
-                  child: Text(
-                    'Week',
-                    style: TextStyle(
-                        color: _tabController.index == 1
-                            ? Color(widget.colorVal)
-                            : Colors.grey),
+                child: TabBar(
+                  controller: _tabController,
+                  // give the indicator a decoration (color and border radius)
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      25.0,
+                    ),
+                    color: Colors.green,
                   ),
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.black,
+                  tabs: [
+                    // first tab [you can add an icon using the icon property]
+                    Tab(
+                      text: 'Day',
+                    ),
+
+                    // second tab [you can add an icon using the icon property]
+                    Tab(
+                      text: 'Week',
+                    ),
+                    Tab(
+                      text: 'Month',
+                    ),
+                    Tab(
+                      text: 'Year',
+                    ),
+                  ],
                 ),
-                Tab(
-                  child: Text(
-                    'Month',
-                    style: TextStyle(
-                        color: _tabController.index == 2
-                            ? Color(widget.colorVal)
-                            : Colors.grey),
-                  ),
+              ),
+              // tab bar view here
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    // first tab bar view widget
+                    Center(
+                      child: Text(
+                        'Place Bid',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+
+                    // second tab bar view widget
+                    Center(
+                      child: Text(
+                        'Buy Now',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Tab(
-                  child: Text(
-                    'Year',
-                    style: TextStyle(
-                        color: _tabController.index == 3
-                            ? Color(widget.colorVal)
-                            : Colors.grey),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          body: TabBarView(
-            controller: _tabController,
-            children: <Widget>[
-              //DayTabs(),
-              //Expense
+              ),
             ],
-          )),
+          ),
+        ),
+      ),
+      // child: Scaffold(
+      //     appBar: AppBar(
+      //       bottom: TabBar(
+      //         controller: _tabController,
+      //         isScrollable: true,
+      //         indicatorColor: Color(0xff3f51b5),
+      //         indicatorWeight: 4.0,
+      //         unselectedLabelColor: Colors.grey,
+      //         tabs: <Widget>[
+      //           Tab(
+      //             child: Text(
+      //               'Day',
+      //               style: TextStyle(
+      //                   color: _tabController.index == 0
+      //                       ? Color(widget.colorVal)
+      //                       : Colors.grey),
+      //             ),
+      //           ),
+      //           Tab(
+      //             child: Text(
+      //               'Week',
+      //               style: TextStyle(
+      //                   color: _tabController.index == 1
+      //                       ? Color(widget.colorVal)
+      //                       : Colors.grey),
+      //             ),
+      //           ),
+      //           Tab(
+      //             child: Text(
+      //               'Month',
+      //               style: TextStyle(
+      //                   color: _tabController.index == 2
+      //                       ? Color(widget.colorVal)
+      //                       : Colors.grey),
+      //             ),
+      //           ),
+      //           Tab(
+      //             child: Text(
+      //               'Year',
+      //               style: TextStyle(
+      //                   color: _tabController.index == 3
+      //                       ? Color(widget.colorVal)
+      //                       : Colors.grey),
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //     body: TabBarView(
+      //       controller: _tabController,
+      //       children: <Widget>[
+      //         //DayTabs(),
+      //         //Expense
+      //       ],
+      //     )),
     );
   }
 }
