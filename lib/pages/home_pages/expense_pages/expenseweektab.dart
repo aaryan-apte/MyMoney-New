@@ -97,6 +97,15 @@ class _ExpenseWeekTabState extends State<ExpenseWeekTab> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          elevation: 10.0,
+          backgroundColor: Colors.blue[900],
+          child: CircleAvatar(
+            radius: 30.0,
+            child: Icon(Icons.add),
+          ),
+          onPressed: () {}
+      ),
     );
   }
 }

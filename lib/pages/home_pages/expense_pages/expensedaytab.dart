@@ -99,6 +99,15 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 10.0,
+        backgroundColor: Colors.blue[900],
+          child: CircleAvatar(
+            radius: 30.0,
+            child: Icon(Icons.add),
+          ),
+          onPressed: () {}
+      ),
     );
   }
 }

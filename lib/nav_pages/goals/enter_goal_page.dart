@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_money/nav_pages/goals/goals_page.dart';
-import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
+// import 'package:my_money/nav_pages/goals/goals_page.dart';
+// import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
 
 class GoalEntry extends StatefulWidget {
   const GoalEntry({Key? key}) : super(key: key);
@@ -13,20 +15,51 @@ class GoalEntry extends StatefulWidget {
 class _GoalEntryState extends State<GoalEntry> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController goalName = TextEditingController();
+    TextEditingController targetAmount = TextEditingController();
+    TextEditingController savedAmount = TextEditingController();
+
+    Future<void> addGoal() async {
+      final goalNameAdd = goalName.text.trim();
+      final targetAmountAdd = int.parse(targetAmount.text.trim());
+      final savedAmountAdd = int.parse(savedAmount.text.trim());
+
+      CollectionReference user1 =
+          FirebaseFirestore.instance.collection('users');
+
+      Map<String, dynamic> map1 = {
+        "goalName": goalNameAdd,
+        "targetAmount": targetAmountAdd,
+        "savedAmount": savedAmountAdd
+      };
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User uid = auth.currentUser!;
+
+      try {
+        await user1
+            .doc(uid.toString())
+            .set(map1)
+            .then((value) => print("Success"));
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Goal'),
+        title: const Text('               New Goal'),
         backgroundColor: Colors.orange,
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  decoration: InputDecoration(
+                  controller: goalName,
+                  decoration: const InputDecoration(
                     hintText: "Please Enter your goal's name",
                     labelText: "Goal Name",
                   ),
@@ -36,7 +69,8 @@ class _GoalEntryState extends State<GoalEntry> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: TextField(
+                child: TextFormField(
+                  controller: targetAmount,
                   decoration: const InputDecoration(
                     hintText: 'Enter the Target Amount',
                     //hintStyle: TextStyle(color:Colors.grey, fontSize: 10),
@@ -53,7 +87,8 @@ class _GoalEntryState extends State<GoalEntry> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: TextField(
+                child: TextFormField(
+                  controller: savedAmount,
                   decoration: const InputDecoration(
                     hintText: 'Enter the Amount Saved Already',
                     //hintStyle: TextStyle(color:Colors.grey, fontSize: 10),
@@ -67,36 +102,44 @@ class _GoalEntryState extends State<GoalEntry> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: 70,
                 decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(60),
-                      topRight: Radius.circular(60),
-                      bottomRight: Radius.circular(60),
-                      bottomLeft: Radius.circular(60),
-                    )),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(60),
+                    topRight: Radius.circular(60),
+                    bottomRight: Radius.circular(60),
+                    bottomLeft: Radius.circular(60),
+                  ),
+                ),
                 child: Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextButton(
-                      onPressed: () =>
-                          {Navigator.pushNamed(context, 'goalpage')},
+                      onPressed: () => {
+                        // Map <String, int> goalData = {};
+                        Navigator.pushNamed(context, 'goalpage')
+                      },
                       child: Row(
                         children: [
-                          Image.asset('assets/goals_icon/targetgoal.png'),
-                          Text(' SAVE GOAL ',
+                          // Image.asset('assets/goals_icon/targetgoal.png'),
+                          TextButton(
+                            child: const Text(
+                              ' SAVE GOAL ',
                               style: TextStyle(
                                   color: Colors.green,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.italic))
+                                  fontStyle: FontStyle.italic),
+                            ),
+                            onPressed: () {
+                              addGoal();
+                              },
+                          )
                         ],
                       ),
                     ),
