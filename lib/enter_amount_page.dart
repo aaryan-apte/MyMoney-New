@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_money/pages/select_category/expense_category.dart';
-import 'package:my_money/pages/select_category/income_category.dart';
+// import 'package:my_money/pages/select_category/expense_category.dart';
+// import 'package:my_money/pages/select_category/income_category.dart';
 
 class EnterAmount extends StatefulWidget
 {

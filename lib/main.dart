@@ -8,8 +8,6 @@ import 'package:my_money/pages/signup/home1.dart';
 import 'package:my_money/pages/signup/input.dart';
 // import 'backend/authentication/authenticate.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:my_money/pages/signup/utils.dart';
-// import 'package:my_money/pages/signup/utils.dart';
 
 import 'backend/authentication/authenticate.dart';
 import 'nav_pages/budget/budgets_page.dart';

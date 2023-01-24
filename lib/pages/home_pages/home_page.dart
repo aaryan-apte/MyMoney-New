@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_money/pages/home_pages/expensetoptabs.dart';
-import 'package:my_money/pages/home_pages/incometoptabs.dart';
+
+import 'incometoptabs.dart';
+// import 'package:my_money/pages/home_pages/incometoptabs.dart';
 
 // import '../home_pages/expensetoptabs.dart';
 // import '../home_pages/incometoptabs.dart';
@@ -41,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
             //     ),
             //   ),
             // ),
+
+            // was initially bottom
             bottom: TabBar(
               isScrollable: true,
               indicatorColor: Colors.white,
@@ -51,9 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     switch (index) {
                       case 0:
                         PrimaryColor = Color(0xffe91e63);
+                        // Navigator.push(context,
+                        // MaterialPageRoute(builder: (context) => IncomeTopTabs(colorVal)));
                         break;
                       case 1:
-                        PrimaryColor = Color(0xff3f51b5);
+                        PrimaryColor = Colors.blue[900]!;
                         break;
                       //case 2:
                       //PrimaryColor=Color(0xffe91e63);
@@ -70,21 +76,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(color: Colors.white, fontSize: 18.0),
                   ),
                 ),
-                SizedBox(
-                  width: 17.0,
-                ),
+                // SizedBox(
+                //   width: 17.0,
+                // ),
                 Tab(
+                  // child: TextButton(
+                  //   child: Text(
+                  //     'INCOME',
+                  //     style: TextStyle(color: Colors.white, fontSize: 18.0),
+                  //   ),
+                  //   onPressed: () {},
+                  // ),
                   child: Text(
                     'INCOME',
                     style: TextStyle(color: Colors.white, fontSize: 18.0),
                   ),
-                )
+                ),
               ],
             ),
           ),
           body: SafeArea(
             child: TabBarView(
-              children: <Widget>[
+              children: [
                 ExpenseTopTabs(0xffe91e63),
                 IncomeTopTabs(0xff3f51b5)
               ],

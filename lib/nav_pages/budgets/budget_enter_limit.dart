@@ -5,16 +5,19 @@ import 'package:flutter/services.dart';
 // import 'package:my_money/pages/select_category/income_category.dart';
 
 class EnterBudgetAmount extends StatefulWidget {
-  const EnterBudgetAmount({super.key});
 
+  // EnterBudgetAmount({required this.category});
+  // String category;
   @override
   _EnterBudgetAmountState createState() => _EnterBudgetAmountState();
 }
 
 class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
+  // widget.category;
   late int firstnum;
   late int secondnum;
   String texttodisplay = "";
+
   late String res;
   late String operatortoperform;
   void btnclicked(String btnval) {

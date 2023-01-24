@@ -1,10 +1,14 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 // import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:my_money/backend/authentication/authenticate.dart';
+// import 'package:my_money/nav_pages/main_page.dart';
+// import 'addUser.dart';
 // import 'package:my_money/backend/services/auth.dart';
 // import 'package:my_money/pages/signup/login.dart';
 // import 'package:my_money/pages/signup/input.dart';
@@ -30,6 +34,16 @@ class _MyRegisterState extends State<MyRegister> {
 
   DatabaseReference ref = FirebaseDatabase.instance.ref();
 
+  Future<void> addUser() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    // final User userData = auth.currentUser!;
+    final String? uid = auth.currentUser?.uid.toString();
+    await users.doc(uid).set({
+      'date': DateTime.now(),
+    });
+  }
+
   Future signUp() async {
     final isValid = formKey.currentState!.validate();
     if (isValid == false) {
@@ -42,13 +56,14 @@ class _MyRegisterState extends State<MyRegister> {
     } on FirebaseAuthException catch (e) {
       print(e);
     }
+    // Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+    Authenticate2();
   }
 
   @override
   Widget build(BuildContext context) {
     final name = nameController.text.trim();
-    // final nameRef = database.ref('')
-    // database.
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.cyan[900],
@@ -88,12 +103,6 @@ class _MyRegisterState extends State<MyRegister> {
                   ),
                   controller: nameController,
                   cursorColor: Colors.white,
-                  // textInputAction: TextInputAction.done,
-                  // obscureText: true,
-                  // autovalidateMode: AutovalidateMode.onUserInteraction,
-                  // validator: (value) => value != null && value.length < 6
-                  //     ? "Enter minimum 6 characters"
-                  //     : null,
                   decoration: InputDecoration(
                     labelText: "Name",
                     labelStyle:
@@ -157,6 +166,7 @@ class _MyRegisterState extends State<MyRegister> {
                     ),
                     onPressed: () {
                       signUp();
+                      addUser();
                     },
                     icon: Icon(Icons.lock_open_rounded),
                     label: Text(
