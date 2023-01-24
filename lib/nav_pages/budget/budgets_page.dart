@@ -18,8 +18,10 @@ class _BudgetPageState extends State<BudgetPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
-        title: const Text("Budgets",
-            style: TextStyle(color: Colors.white, fontSize: 20)),
+        title: Center(
+          child: const Text("Budgets",
+              style: TextStyle(color: Colors.white, fontSize: 20)),
+        ),
       ),
       body: Container(
         color: Colors.lightBlueAccent,

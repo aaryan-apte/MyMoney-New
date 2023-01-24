@@ -19,8 +19,10 @@ class _GoalsPageState extends State<GoalsPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.orange,
-          title: Text("Goals",
-              style: TextStyle(color: Colors.white, fontSize: 20)),
+          title: Center(
+            child: Text("Goals",
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+          ),
         ),
         body: Container(
             color: Colors.lightGreen,

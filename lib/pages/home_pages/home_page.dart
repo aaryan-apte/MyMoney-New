@@ -32,18 +32,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: PrimaryColor,
-            // title: Padding(
-            //   padding: EdgeInsets.only(top: 8.0),
-            //   child: Center(
-            //     child: Text(
-            //       "You have saved 1000 up till now!",
-            //       style: TextStyle(
-            //         fontSize: 10,
-            //       ),
-            //     ),
-            //   ),
-            // ),
-
+            title: Center(
+              child: Text(
+                "Paisa 'o Paisa",
+                style: TextStyle(
+                  fontSize: 26.0,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.w800
+                ),
+              ),
+            ),
             // was initially bottom
             bottom: TabBar(
               isScrollable: true,
@@ -99,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: TabBarView(
               children: [
                 ExpenseTopTabs(0xffe91e63),
-                IncomeTopTabs(0xff3f51b5)
+                IncomeTopTabs(0xff3f51b5),
               ],
             ),
           ),

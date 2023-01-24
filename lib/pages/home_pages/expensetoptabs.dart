@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:my_money/pages/home_pages/expense_pages/expensedaytab.dart';
 import 'package:my_money/pages/home_pages/expense_pages/expensemonthtab.dart';
@@ -71,11 +70,16 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
           ),
         ),
         body: TabBarView(
+          controller: _tabController,
           children: [
             ExpenseDayTab(),
             ExpenseWeekTab(),
             ExpenseMonthTab(),
             ExpenseYearTab(),
+            // Center(child: Text("Jay Shree Ram!")),
+            // Center(child: Text("Jay Shree Krishna!")),
+            // Center(child: Text("Jay Shree Madhav!")),
+            // Center(child: Text("Jay Shree Shyam!")),
           ],
         ),
       ),
