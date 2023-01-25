@@ -27,6 +27,7 @@ class _GoalEntryState extends State<GoalEntry> {
       CollectionReference user1 =
           FirebaseFirestore.instance.collection('users');
 
+
       Map<String, dynamic> map1 = {
         "goalName": goalNameAdd,
         "targetAmount": targetAmountAdd,
@@ -38,8 +39,14 @@ class _GoalEntryState extends State<GoalEntry> {
       try {
         await user1
             .doc(uid.toString())
-            .set(map1)
+            .collection('goals')
+            .add(map1)
             .then((value) => print("Success"));
+        // await user1
+        //     .doc(uid.toString())
+        //     .collection('goals')
+        //     .updateDoc()
+        //     .then((value) => print("Success"));
       } catch (e) {
         print(e.toString());
       }
@@ -138,7 +145,7 @@ class _GoalEntryState extends State<GoalEntry> {
                             ),
                             onPressed: () {
                               addGoal();
-                              },
+                            },
                           )
                         ],
                       ),

@@ -1,3 +1,7 @@
+// import 'dart:js_util';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:my_money/nav_pages/budgets/budgets_page.dart';
@@ -5,14 +9,78 @@ import 'package:flutter/services.dart';
 // import 'package:my_money/pages/select_category/income_category.dart';
 
 class EnterBudgetAmount extends StatefulWidget {
+  String budgetCategory;
 
-  // EnterBudgetAmount({required this.category});
-  // String category;
+  EnterBudgetAmount({super.key, required this.budgetCategory});
+
   @override
   _EnterBudgetAmountState createState() => _EnterBudgetAmountState();
 }
 
 class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
+  @override
+  late String budgetCategoryAdd;
+  void initState() {
+    budgetCategoryAdd = widget.budgetCategory;
+  }
+
+  Future<void> addBudget() async {
+    // final FirebaseAuth auth = FirebaseAuth.instance;
+    // final User uid = auth.currentUser!().getEmail();
+    final String? uid = FirebaseAuth.instance.currentUser?.email;
+
+    Map<String, int> map1 = {budgetCategoryAdd: int.parse(texttodisplay)};
+
+    // CollectionReference user1 = FirebaseFirestore.instance.collection('users');
+    // DocumentReference user2 = user1.doc(uid.toString());
+    // CollectionReference user3 = user2.collection('goals');
+    // DocumentReference user4 = user3.doc(uid.toString());
+    var user1 = FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid.toString())
+        .collection('budgets')
+        .doc();
+
+    final docID1;
+    final docID;
+
+    var user2 = FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid.toString())
+        .collection('budgets');
+
+    try {
+      
+    // bool ok;
+    // user1.get().then((onexist){
+    // onexist.exists ? ok = true : ok = false;
+    // }
+      if(await user1.get().then((onexist) => onexist.exists)){
+        await user1.update({budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("Success"));
+      }
+      else{
+        await user2.add({budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("success"));
+        docID1 = user2.doc().get();
+        docID = docID1.
+
+      }
+
+  
+        // await user1.add({
+        //   budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))
+        // }).then((value) => print("Success"));
+      // if(querySnapshot.)
+      // await user1.FieldValue
+      // await user1
+      //     .doc(uid.toString())
+      //     .collection('goals')
+      //     .updateDoc()
+      //     .then((value) => print("Success"));
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   // widget.category;
   late int firstnum;
   late int secondnum;
@@ -172,7 +240,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
             Row(
               children: <Widget>[
                 customButtom("6"),
-                customButtom("2"),
+                customButtom("5"),
                 customButtom("4"),
                 customButtom("-"),
               ],
@@ -201,6 +269,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
                   backgroundColor: Colors.white,
                 ),
                 onPressed: () {
+                  addBudget();
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },

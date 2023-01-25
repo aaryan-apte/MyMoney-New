@@ -1,12 +1,21 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'budget_enter_limit.dart';
 // import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
 
 class BudgetCategory extends StatefulWidget {
+  const BudgetCategory({super.key});
+
   @override
   _BudgetCategoryState createState() => _BudgetCategoryState();
 }
 
 class _BudgetCategoryState extends State<BudgetCategory> {
+
+  late String budgetCategory;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,7 +230,7 @@ class _BudgetCategoryState extends State<BudgetCategory> {
             onPressed: () {},
             icon: icn,
             iconSize: 50,
-            color: Color(0xffe91e63),
+            color: const Color(0xffe91e63),
           ),
           Text(txt),
         ],
@@ -232,8 +241,13 @@ class _BudgetCategoryState extends State<BudgetCategory> {
   TextButton IconGenerator(String img, String txt) {
     return TextButton(
       onPressed: () {
-        // EnterBudgetAmount()
-        Navigator.pushNamed(context, 'budgetlimit');
+        budgetCategory = txt;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => EnterBudgetAmount(budgetCategory: budgetCategory)
+            )
+        );
       },
       child: Column(
         children: [
@@ -242,7 +256,7 @@ class _BudgetCategoryState extends State<BudgetCategory> {
             txt,
             style: const TextStyle(
               color: Colors.black,
-              fontSize: 11,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
           )

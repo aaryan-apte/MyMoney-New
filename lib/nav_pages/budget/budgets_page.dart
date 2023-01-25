@@ -1,3 +1,5 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:my_money/nav_pages/budgets/budget_category_page.dart';
 // import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
@@ -12,15 +14,49 @@ class BudgetPage extends StatefulWidget {
 class _BudgetPageState extends State<BudgetPage> {
   @override
   // final List _limits = [];
+  // String budgetCategory = "";
+
+  // Future<void> addBudget() async {
+  //   final budgetCategoryAdd = budgetCategory;
+  //   // final targetAmountAdd = int.parse(targetAmount.text.trim());
+  //   // final savedAmountAdd = int.parse(savedAmount.text.trim());
+  //
+  //   CollectionReference user1 =
+  //   FirebaseFirestore.instance.collection('users');
+  //
+  //
+  //   Map<String, dynamic> map1 = {
+  //     "goalName": budgetCategoryAdd,
+  //     // "targetAmount": targetAmountAdd,
+  //     // "savedAmount": savedAmountAdd
+  //   };
+  //   final FirebaseAuth auth = FirebaseAuth.instance;
+  //   final User uid = auth.currentUser!;
+  //
+  //   try {
+  //     await user1
+  //         .doc(uid.toString())
+  //         .collection('goals')
+  //         .add(map1)
+  //         .then((value) => print("Success"));
+  //     // await user1
+  //     //     .doc(uid.toString())
+  //     //     .collection('goals')
+  //     //     .updateDoc()
+  //     //     .then((value) => print("Success"));
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
-        title: Center(
-          child: const Text("Budgets",
-              style: TextStyle(color: Colors.white, fontSize: 20)),
+        title: const Center(
+          child: Text("Budgets",
+              style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w500)),
         ),
       ),
       body: Container(

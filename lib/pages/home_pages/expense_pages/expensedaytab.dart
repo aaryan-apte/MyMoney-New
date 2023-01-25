@@ -9,6 +9,9 @@ class ExpenseDayTab extends StatefulWidget {
 
 class _ExpenseDayTabState extends State<ExpenseDayTab> {
 
+  // var date = DateTime.now();
+  var date = "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
+
   int expenseDay = 890;
   late final TabController _tabController;
   @override
@@ -83,7 +86,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
-                                "Hare Krishna!",
+                                date,
                                 textAlign: TextAlign.center,
                               ),
                             ),
