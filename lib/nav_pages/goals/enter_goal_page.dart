@@ -34,7 +34,7 @@ class _GoalEntryState extends State<GoalEntry> {
         "savedAmount": savedAmountAdd
       };
       final FirebaseAuth auth = FirebaseAuth.instance;
-      final User uid = auth.currentUser!;
+      final String? uid = auth.currentUser!.email;
 
       try {
         await user1

@@ -89,21 +89,21 @@ class _GoalsPageState extends State<GoalsPage> {
                 ),
               ),
             ),
-            ListView.builder(
-              itemCount: _goals.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Container(
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: _goals[index],
-                  ),
-                );
-              },
-            )
+            // ListView.builder(
+            //   itemCount: _goals.length,
+            //   itemBuilder: (context, index) {
+            //     return Padding(
+            //       padding: const EdgeInsets.symmetric(vertical: 8.0),
+            //       child: Container(
+            //         height: 50,
+            //         decoration: const BoxDecoration(
+            //           color: Colors.white,
+            //         ),
+            //         child: _goals[index],
+            //       ),
+            //     );
+            //   },
+            // )
           ],
         ),
       ),

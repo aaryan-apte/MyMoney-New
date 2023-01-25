@@ -18,7 +18,6 @@ class EnterBudgetAmount extends StatefulWidget {
 }
 
 class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
-  @override
   late String budgetCategoryAdd;
   void initState() {
     budgetCategoryAdd = widget.budgetCategory;
@@ -50,25 +49,22 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
         .collection('budgets');
 
     try {
-      
-    // bool ok;
-    // user1.get().then((onexist){
-    // onexist.exists ? ok = true : ok = false;
-    // }
-      if(await user1.get().then((onexist) => onexist.exists)){
-        await user1.update({budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("Success"));
-      }
-      else{
-        await user2.add({budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("success"));
-        docID1 = user2.doc().get();
-        docID = docID1.
+      // bool ok;
+      // user1.get().then((onexist){
+      // onexist.exists ? ok = true : ok = false;
+      // // }
+      //   if(await user1.get().then((onexist) => onexist.exists)){
+      //     await user1.update({budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("Success"));
+      //   }
+      //   else{
+      //     await user2.add({budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("success"));
+      //     docID1 = user2.doc().get();
+      //     docID = docID1;
+      //   }
 
-      }
-
-  
-        // await user1.add({
-        //   budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))
-        // }).then((value) => print("Success"));
+      await user1.set({
+        budgetCategoryAdd: FieldValue.increment(int.parse(texttodisplay))
+      }).then((value) => print("Success"));
       // if(querySnapshot.)
       // await user1.FieldValue
       // await user1
