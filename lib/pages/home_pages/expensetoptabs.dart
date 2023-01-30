@@ -38,7 +38,7 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
   Widget build(BuildContext context) {
     int amountDay = 25000;
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -58,9 +58,6 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
                 text: 'Day',
               ),
               Tab(
-                text: 'Week',
-              ),
-              Tab(
                 text: 'Month',
               ),
               Tab(
@@ -73,7 +70,6 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
           controller: _tabController,
           children: [
             ExpenseDayTab(),
-            ExpenseWeekTab(),
             ExpenseMonthTab(),
             ExpenseYearTab(),
           ],
