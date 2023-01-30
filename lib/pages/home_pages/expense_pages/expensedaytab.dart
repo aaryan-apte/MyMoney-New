@@ -8,12 +8,12 @@ class ExpenseDayTab extends StatefulWidget {
 }
 
 class _ExpenseDayTabState extends State<ExpenseDayTab> {
-
   // var date = DateTime.now();
-  var date = "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
+  var date =
+      "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
 
   int expenseDay = 890;
-  late final TabController _tabController;
+  // late final TabController _tabController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +27,10 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
               child: Column(
                 // controller: _tabController,
                 children: [
-                  SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.all(10.0),
+                      margin: const EdgeInsets.all(10.0),
                       // height: 100.0,
                       // width: 200.0,
                       decoration: BoxDecoration(
@@ -43,7 +41,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                         child: Text(
                           'You\'ve spent ₹$expenseDay',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w300,
                               color: Colors.white),
@@ -51,9 +49,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 17.0,
-                  ),
+                  const SizedBox(height: 17.0),
                 ],
               ),
             ),
@@ -64,38 +60,40 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                   color: Colors.lightGreen[700],
                   borderRadius: BorderRadius.circular(17.0),
                 ),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: 15,
-                  itemBuilder: (context, int index) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 15.0,
-                            left: 13.0,
-                            right: 13.0,
-                          ),
-                          child: Container(
-                            height: 70.0,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15.0)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                date,
-                                textAlign: TextAlign.center,
+                child: Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: 15,
+                    itemBuilder: (context, int index) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 15.0,
+                              left: 13.0,
+                              right: 13.0,
+                            ),
+                            child: Container(
+                              height: 70.0,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15.0)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  date,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        // SizedBox(height: 10.0,),
-                      ],
-                    );
-                  },
+                          // SizedBox(height: 10.0,),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -103,16 +101,15 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        elevation: 10.0,
-        backgroundColor: Colors.blue[900],
-          child: CircleAvatar(
+          elevation: 10.0,
+          backgroundColor: Colors.blue[900],
+          child: const CircleAvatar(
             radius: 30.0,
             child: Icon(Icons.add),
           ),
           onPressed: () {
             Navigator.pushNamed(context, 'expenseCategory');
-          }
-      ),
+          }),
     );
   }
 }

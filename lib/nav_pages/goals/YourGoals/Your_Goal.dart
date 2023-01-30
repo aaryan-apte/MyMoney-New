@@ -68,7 +68,7 @@ class _Your_GoalState extends State<Your_Goal> {
                     int savedAmount = docData[FireStoreFields.savedAmount];
                     int targetAmount = docData[FireStoreFields.targetAmount];
                     return Card(
-                      elevation: 4,
+                      elevation: 7,
                       color: Colors.lightGreen,
                       child: ExpansionTile(
                         iconColor: Colors.white,
@@ -80,13 +80,14 @@ class _Your_GoalState extends State<Your_Goal> {
                           "$goalName\n",
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 21,
                             fontWeight: FontWeight.w700,
                             fontStyle: FontStyle.italic,
                           ),
                         ),
                         children: [
                           LinearPercentIndicator(
+                            barRadius: Radius.circular(9.0),
                             //leaner progress bar
                             animation: true,
                             animationDuration: 1000,
@@ -99,7 +100,7 @@ class _Your_GoalState extends State<Your_Goal> {
                               style: const TextStyle(
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                                  color: Colors.white),
                             ),
                             linearStrokeCap: LinearStrokeCap.roundAll,
                             progressColor: Colors.blueAccent,
