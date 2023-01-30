@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_money/enter_amount_page.dart';
+// import 'package:my_money/enter_amount_page.dart';
 
 class ExpenseCategory extends StatefulWidget {
   @override
@@ -7,30 +8,37 @@ class ExpenseCategory extends StatefulWidget {
 }
 
 class _ExpenseCategoryState extends State<ExpenseCategory> {
+
+  late String category;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
-      body: Container(
-        child: Column(children: [
-          Container(
+      backgroundColor: Colors.blue,
+      body: Column(children: [
+        Expanded(
+          child: Container(
             height: 200,
             decoration: const BoxDecoration(
-                color: Color(0xffe91e63),
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(60),
-                  bottomLeft: Radius.circular(60),
-                )),
+              color: Color(0xffe91e63),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(60),
+                bottomLeft: Radius.circular(60),
+              ),
+            ),
           ),
-          const SizedBox(height: 20),
-          Container(
-            height: 570,
+        ),
+        const SizedBox(height: 20),
+        Expanded(
+          flex: 3,
+          child: Container(
+            // height: 580,
             decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(50),
-                  topLeft: Radius.circular(50),
-                )),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(50),
+                topLeft: Radius.circular(50),
+              ),
+            ),
             child: Column(
               children: [
                 const Padding(
@@ -38,7 +46,9 @@ class _ExpenseCategoryState extends State<ExpenseCategory> {
                     child: Center(
                         child: Text("Pick up a Category",
                             style: TextStyle(
-                                color: Color(0xffe91e63), fontSize: 20)))),
+                                color: Color(0xffe91e63),
+                                fontSize: 22,
+                                fontWeight: FontWeight.w500)))),
                 Row(
                   children: [
                     Expanded(
@@ -160,8 +170,8 @@ class _ExpenseCategoryState extends State<ExpenseCategory> {
               ],
             ),
           ),
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 
@@ -173,7 +183,7 @@ class _ExpenseCategoryState extends State<ExpenseCategory> {
               onPressed: () {},
               icon: icn,
               iconSize: 50,
-              color: Color(0xffe91e63)),
+              color: const Color(0xffe91e63)),
           Text(txt),
         ],
       ),
@@ -182,18 +192,26 @@ class _ExpenseCategoryState extends State<ExpenseCategory> {
 
   TextButton IconGenerator(String img, String txt) {
     return TextButton(
-        onPressed: () {
-          Navigator.pushNamed(context, 'amount');
-        },
-        child: Column(
-          children: [
-            Image.asset(img),
-            Text(txt,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500))
-          ],
-        ));
+      onPressed: () {
+        category = txt;
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EnterAmount(category: category,))
+        );
+      },
+      child: Column(
+        children: [
+          Image.asset(img),
+          Text(
+            txt,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

@@ -78,8 +78,8 @@ class _ExpenseWeekTabState extends State<ExpenseWeekTab> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15.0)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(10.0),
                               child: Text(
                                 "Hare Krishna!",
                                 textAlign: TextAlign.center,
@@ -97,17 +97,17 @@ class _ExpenseWeekTabState extends State<ExpenseWeekTab> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          elevation: 10.0,
-          backgroundColor: Colors.blue[900],
-          child: CircleAvatar(
-            radius: 30.0,
-            child: Icon(Icons.add),
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, 'expenseCategory');
-          }
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //     elevation: 10.0,
+      //     backgroundColor: Colors.blue[900],
+      //     child: const CircleAvatar(
+      //       radius: 30.0,
+      //       child: Icon(Icons.add),
+      //     ),
+      //     onPressed: () {
+      //       Navigator.pushNamed(context, 'expenseCategory');
+      //     }
+      // ),
     );
   }
 }

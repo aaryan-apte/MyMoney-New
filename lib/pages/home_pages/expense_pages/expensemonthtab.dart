@@ -22,12 +22,12 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
               child: Column(
                 // controller: _tabController,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10.0,
                   ),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.all(10.0),
+                      margin: const EdgeInsets.all(10.0),
                       // height: 100.0,
                       // width: 200.0,
                       decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                         child: Text(
                           'You\'ve spent ₹$expenseMonth',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w300,
                               color: Colors.white),
@@ -46,7 +46,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 17.0,
                   ),
                 ],
@@ -78,8 +78,8 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15.0)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(10.0),
                               child: Text(
                                 "Hare Krishna!",
                                 textAlign: TextAlign.center,
@@ -97,17 +97,17 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          elevation: 10.0,
-          backgroundColor: Colors.blue[900],
-          child: CircleAvatar(
-            radius: 30.0,
-            child: Icon(Icons.add),
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, 'expenseCategory');
-          }
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //     elevation: 10.0,
+      //     backgroundColor: Colors.blue[900],
+      //     child: const CircleAvatar(
+      //       radius: 30.0,
+      //       child: Icon(Icons.add),
+      //     ),
+      //     onPressed: () {
+      //       Navigator.pushNamed(context, 'expenseCategory');
+      //     }
+      // ),
     );
   }
 }

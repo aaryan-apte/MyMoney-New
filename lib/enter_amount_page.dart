@@ -1,15 +1,44 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_money/pages/home_pages/home_page.dart';
+import 'package:my_money/nav_pages/budgets/budget_backend/buckets.firestore.dart';
+// import 'package:my_money/pages/home_pages/home_page.dart';
 // import 'package:my_money/nav_pages/main_page.dart';
 
 class EnterAmount extends StatefulWidget
 {
+  String category;
+  EnterAmount({super.key, required this.category});
+
   @override
   _EnterAmountState createState() => _EnterAmountState();
 }
 
 class _EnterAmountState extends State<EnterAmount> {
+
+  late String category;
+  void initState(){
+    category = widget.category;
+  }
+
+  Future<void> addExpense() async {
+    final String? email = FirebaseAuth.instance.currentUser?.email;
+
+    Map<String, dynamic> map1 = {"categoryName": category, "expense": int.parse(texttodisplay)};
+
+    var dateToday = "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
+
+    final user1 = FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(email).collection(FirestoreBuckets.dates).doc(dateToday).collection(FirestoreBuckets.expenses);
+
+    try {
+      await user1.add(map1).then((value) => print("Success"));
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   late int firstnum;
   late int secondnum;
@@ -150,7 +179,7 @@ class _EnterAmountState extends State<EnterAmount> {
                           height: 400,
                           alignment: Alignment.bottomRight,
                           child: Text(
-                            "Rs $texttodisplay",
+                            "₹$texttodisplay",
                                 style:TextStyle(fontSize: 40.0, fontWeight: FontWeight.w600, color: Colors.white)
                           ),
                         ),
@@ -160,15 +189,15 @@ class _EnterAmountState extends State<EnterAmount> {
                        customButtom("9"),
                         customButtom("8"),
                         customButtom("7"),
-                        customButtom("+"),
+                        // customButtom("+"),
                       ],
                     ),
                     Row(
                       children:<Widget> [
                         customButtom("6"),
-                        customButtom("2"),
+                        customButtom("5"),
                         customButtom("4"),
-                        customButtom("-"),
+                        // customButtom("-"),
                       ],
                     ),
                     Row(
@@ -176,7 +205,7 @@ class _EnterAmountState extends State<EnterAmount> {
                         customButtom("3"),
                         customButtom("2"),
                         customButtom("1"),
-                        customButtom("x"),
+                        // customButtom("x"),
                       ],
                     ),
                     Row(
@@ -184,7 +213,7 @@ class _EnterAmountState extends State<EnterAmount> {
                         customButtom("C"),
                         customButtom("0"),
                         customButtom("="),
-                        customButtom("÷"),
+                        // customButtom("÷"),
                       ],
                     ),
                     Container(
@@ -197,7 +226,10 @@ class _EnterAmountState extends State<EnterAmount> {
 
                           ),
                           onPressed:() {
-                            Navigator.pushNamed(context, 'home_page');
+                            addExpense();
+                            // Navigator.pushNamed(context, 'home_page');
+                            Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                           child: Text("SAVE", style: TextStyle(fontSize: 25.0, color: Colors.grey) ),
 

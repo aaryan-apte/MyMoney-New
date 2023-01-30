@@ -10,7 +10,6 @@ class ExpenseYearTab extends StatefulWidget {
 class _ExpenseYearTabState extends State<ExpenseYearTab> {
   int expenseYear = 139870;
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
@@ -39,7 +38,7 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
                         child: Text(
                           'You\'ve spent ₹$expenseYear',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w300,
                               color: Colors.white),
@@ -47,9 +46,7 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 17.0,
-                  ),
+                  const SizedBox(height: 17.0),
                 ],
               ),
             ),
@@ -79,8 +76,8 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15.0)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(10.0),
                               child: Text(
                                 "Hare Krishna!",
                                 textAlign: TextAlign.center,
@@ -98,17 +95,17 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          elevation: 10.0,
-          backgroundColor: Colors.blue[900],
-          child: CircleAvatar(
-            radius: 30.0,
-            child: Icon(Icons.add),
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, 'expenseCategory');
-          }
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //     elevation: 10.0,
+      //     backgroundColor: Colors.blue[900],
+      //     child: const CircleAvatar(
+      //       radius: 30.0,
+      //       child: Icon(Icons.add),
+      //     ),
+      //     onPressed: () {
+      //       Navigator.pushNamed(context, 'expenseCategory');
+      //     }
+      // ),
     );
   }
 }

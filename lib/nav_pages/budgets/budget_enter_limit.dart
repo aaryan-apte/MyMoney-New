@@ -192,7 +192,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
                 customButtom("9"),
                 customButtom("8"),
                 customButtom("7"),
-                customButtom("+"),
+                // customButtom("+"),
               ],
             ),
             Row(
@@ -200,7 +200,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
                 customButtom("6"),
                 customButtom("5"),
                 customButtom("4"),
-                customButtom("-"),
+                // customButtom("-"),
               ],
             ),
             Row(
@@ -208,7 +208,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
                 customButtom("3"),
                 customButtom("2"),
                 customButtom("1"),
-                customButtom("x"),
+                // customButtom("x"),
               ],
             ),
             Row(
@@ -216,7 +216,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
                 customButtom("C"),
                 customButtom("0"),
                 customButtom("="),
-                customButtom("÷"),
+                // customButtom("÷"),
               ],
             ),
             Container(

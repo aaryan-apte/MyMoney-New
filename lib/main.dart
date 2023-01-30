@@ -57,7 +57,7 @@ Future main() async {
       // 'budgetlimit': (context) => EnterBudgetAmount(),
       'goalpage': (context) => GoalsPage(),
       'goalentry': (context) => GoalEntry(),
-      'amount': (context) => EnterAmount(),
+      // 'amount': (context) => EnterAmount(),
       // 'register': (context) => MyRegister(
       //       toggleLoginSignup: myRegister.toggleLoginSignup,
       // ),

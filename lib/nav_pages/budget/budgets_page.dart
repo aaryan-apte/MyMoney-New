@@ -195,10 +195,10 @@ class _BudgetPageState extends State<BudgetPage> {
                                       ),
                                       //const SizedBox(width: 18.0),
                                       Text(
-                                        "$budget",
+                                        "₹$budget",
                                         textAlign: TextAlign.end,
                                         style: const TextStyle(fontSize: 24.0,
-                                        fontWeight: FontWeight.w600),
+                                        fontWeight: FontWeight.w500),
                                       )
                                     ],
                                   ),

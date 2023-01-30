@@ -5,7 +5,7 @@ import 'package:my_money/nav_pages/records/records_page.dart';
 import 'package:my_money/nav_pages/budget/budgets_page.dart';
 import 'package:my_money/nav_pages/goals/goals_page.dart';
 
-Color PrimaryColor = Color(0xff109618);
+Color PrimaryColor = Color(0xff3f51b5);
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

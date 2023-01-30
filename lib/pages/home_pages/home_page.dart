@@ -16,7 +16,7 @@ import 'package:my_money/pages/signup/register.dart';
 import 'package:my_money/pages/signup/input.dart';
 import 'package:my_money/pages/homepage/expensetoptabs.dart';*/
 
-Color PrimaryColor = Color(0xff109618);
+Color PrimaryColor = Color(0xff3f51b5);
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
