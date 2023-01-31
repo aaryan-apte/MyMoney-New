@@ -2,11 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_money/pages/home_pages/expense_pages/expensedaytab.dart';
 import 'package:my_money/pages/home_pages/expense_pages/expensemonthtab.dart';
-import 'package:my_money/pages/home_pages/expense_pages/expenseweektab.dart';
 import 'package:my_money/pages/home_pages/expense_pages/expenseyeartab.dart';
 
 class ExpenseTopTabs extends StatefulWidget {
-  ExpenseTopTabs(this.colorVal);
+  ExpenseTopTabs(this.colorVal, {super.key});
   int colorVal;
 
   @override
@@ -68,7 +67,7 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
         ),
         body: TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
             ExpenseDayTab(),
             ExpenseMonthTab(),
             ExpenseYearTab(),

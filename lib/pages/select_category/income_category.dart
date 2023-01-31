@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_money/enter_amount_page.dart';
+// import 'package:my_money/enter_amount_page.dart';
 
 class IncomeCategory extends StatefulWidget {
   @override
@@ -27,11 +27,12 @@ class _IncomeCategoryState extends State<IncomeCategory> {
           Container(
             height: 500,
             decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(50),
-                  topLeft: Radius.circular(50),
-                )),
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(50),
+                topLeft: Radius.circular(50),
+              ),
+            ),
             child: Column(
               children: [
                 const Padding(
@@ -193,7 +194,7 @@ class _IncomeCategoryState extends State<IncomeCategory> {
               onPressed: () {},
               icon: icn,
               iconSize: 50,
-              color: Color(0xffe91e63)),
+              color: const Color(0xffe91e63)),
           Text(txt),
         ],
       ),
@@ -207,7 +208,7 @@ class _IncomeCategoryState extends State<IncomeCategory> {
           children: [
             Image.asset(img),
             Text(txt,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 11,
                     fontWeight: FontWeight.w500))

@@ -32,7 +32,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
+    // final user = FirebaseAuth.instance.currentUser!;
 
     return Scaffold(
       backgroundColor: Colors.white,

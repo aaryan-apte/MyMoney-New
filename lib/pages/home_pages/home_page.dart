@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   () {
                     switch (index) {
                       case 0:
-                        PrimaryColor = Color(0xffe91e63);
+                        PrimaryColor = Colors.blue[900]!;
                         // Navigator.push(context,
                         // MaterialPageRoute(builder: (context) => IncomeTopTabs(colorVal)));
                         break;
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
           body: SafeArea(
             child: TabBarView(
               children: [
-                ExpenseTopTabs(0xffe91e63),
+                ExpenseTopTabs(0xff3f51b5),
                 IncomePage(0xff3f51b5),
                 //IncomeTopTabs(0xff3f51b5),
               ],

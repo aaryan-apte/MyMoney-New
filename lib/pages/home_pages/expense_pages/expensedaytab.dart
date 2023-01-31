@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../nav_pages/budgets/budget_backend/buckets.firestore.dart';
@@ -27,7 +28,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
   int getExpenseDay() {
     // super.initState();
     int expenseDay = 0;
-    var stream1 = FirebaseFirestore.instance
+    FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
         .doc(getEmail())
         .collection(FirestoreBuckets.dates)
@@ -147,7 +148,9 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                           snapshot) {
                     if (snapshot.hasData && snapshot.data != null) {
-                      print("Total Documents: ${snapshot.data!.docs.length}");
+                      if (kDebugMode) {
+                        print("Total Documents: ${snapshot.data!.docs.length}");
+                      }
                       if (snapshot.data!.docs.isNotEmpty) {
                         return Expanded(
                           child: ListView.builder(

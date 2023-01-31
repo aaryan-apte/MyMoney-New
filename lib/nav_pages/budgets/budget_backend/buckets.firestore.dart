@@ -10,4 +10,9 @@ class FirestoreBuckets {
   static const String dates = "dates";
   static const String expenses = "expenses";
   static const String expense = "expense";
+
+//  Income:
+  static const String income = "income";
+  static const String totalSavings = "totalSavings";
+  static const String incomeDocument = "incomeDocument";
 }
