@@ -6,8 +6,7 @@ import 'package:my_money/nav_pages/budgets/budget_backend/buckets.firestore.dart
 // import 'package:my_money/pages/home_pages/home_page.dart';
 // import 'package:my_money/nav_pages/main_page.dart';
 
-class EnterAmount extends StatefulWidget
-{
+class EnterAmount extends StatefulWidget {
   String category;
   EnterAmount({super.key, required this.category});
 
@@ -16,22 +15,28 @@ class EnterAmount extends StatefulWidget
 }
 
 class _EnterAmountState extends State<EnterAmount> {
-
   late String category;
-  void initState(){
+  void initState() {
     category = widget.category;
   }
 
   Future<void> addExpense() async {
     final String? email = FirebaseAuth.instance.currentUser?.email;
 
-    Map<String, dynamic> map1 = {"categoryName": category, "expense": int.parse(texttodisplay)};
+    Map<String, dynamic> map1 = {
+      "categoryName": category,
+      "expense": int.parse(texttodisplay)
+    };
 
-    var dateToday = "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
+    var dateToday =
+        "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
 
     final user1 = FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
-        .doc(email).collection(FirestoreBuckets.dates).doc(dateToday).collection(FirestoreBuckets.expenses);
+        .doc(email)
+        .collection(FirestoreBuckets.dates)
+        .doc(dateToday)
+        .collection(FirestoreBuckets.expenses);
 
     try {
       await user1.add(map1).then((value) => print("Success"));
@@ -45,19 +50,20 @@ class _EnterAmountState extends State<EnterAmount> {
   String texttodisplay = "";
   late String res;
   late String operatortoperform;
-  void btnclicked(String btnval){
-    if(btnval=="C"){
-      texttodisplay ="";
-      firstnum =0;
-      secondnum=0;
-      res="";
-    }
-    else if(btnval=="+"|| btnval=="-" || btnval=="x" || btnval=="÷") {
+  void btnclicked(String btnval) {
+    if (btnval == "C") {
+      texttodisplay = "";
+      firstnum = 0;
+      secondnum = 0;
+      res = "";
+    } else if (btnval == "+" ||
+        btnval == "-" ||
+        btnval == "x" ||
+        btnval == "÷") {
       firstnum = int.parse(texttodisplay);
       res = "";
       operatortoperform = btnval;
-    }
-    else if(btnval == "=") {
+    } else if (btnval == "=") {
       secondnum = int.parse(texttodisplay);
       if (operatortoperform == "+") {
         res = (firstnum + secondnum).toString();
@@ -71,8 +77,7 @@ class _EnterAmountState extends State<EnterAmount> {
       if (operatortoperform == "÷") {
         res = (firstnum ~/ secondnum).toString();
       }
-    }
-    else{
+    } else {
       res = int.parse(texttodisplay + btnval).toString();
     }
 
@@ -81,33 +86,31 @@ class _EnterAmountState extends State<EnterAmount> {
     });
   }
 
-
-
-  Widget customButtom(String btnval){
+  Widget customButtom(String btnval) {
     return Expanded(
       child: Container(
-          child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              padding: EdgeInsets.all(25.0),
-              backgroundColor: Colors.white,
-            ),
-            onPressed:() => btnclicked(btnval),
-            child: Text(btnval, style: TextStyle(fontSize: 25.0, color: Colors.black) ),
-
+        child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            padding: EdgeInsets.all(25.0),
+            backgroundColor: Colors.white,
           ),
-
+          onPressed: () => btnclicked(btnval),
+          child: Text(btnval,
+              style: TextStyle(fontSize: 25.0, color: Colors.black)),
+        ),
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:Colors.white,
+        backgroundColor: Colors.white,
         title: const Text("Enter the Amount",
-              style: TextStyle(color:Color(0xffe91e63),
-        )
-      ),
+            style: TextStyle(
+              color: Color(0xffe91e63),
+            )),
       ),
       //backgroundColor: Colors.grey,
       /*body: Container(
@@ -154,15 +157,15 @@ class _EnterAmountState extends State<EnterAmount> {
                     )
                 ),
               ),*/
-             body: Container(
-               //height: 650,
-               decoration: const BoxDecoration(
-                 color: Color(0xffe91e63),
-               ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    /*Expanded(
+      body: Container(
+          //height: 650,
+          decoration: const BoxDecoration(
+            color: Color(0xffe91e63),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              /*Expanded(
                         child: Container(
                           height: 200 ,
                           child: TextField(
@@ -174,72 +177,68 @@ class _EnterAmountState extends State<EnterAmount> {
                         )
                     ),
                     ),*/
-                    Expanded(
-                        child: Container(
-                          height: 400,
-                          alignment: Alignment.bottomRight,
-                          child: Text(
-                            "₹$texttodisplay",
-                                style:TextStyle(fontSize: 40.0, fontWeight: FontWeight.w600, color: Colors.white)
-                          ),
-                        ),
-                    ),
-                    Row(
-                      children:<Widget> [
-                       customButtom("9"),
-                        customButtom("8"),
-                        customButtom("7"),
-                        // customButtom("+"),
-                      ],
-                    ),
-                    Row(
-                      children:<Widget> [
-                        customButtom("6"),
-                        customButtom("5"),
-                        customButtom("4"),
-                        // customButtom("-"),
-                      ],
-                    ),
-                    Row(
-                      children:<Widget> [
-                        customButtom("3"),
-                        customButtom("2"),
-                        customButtom("1"),
-                        // customButtom("x"),
-                      ],
-                    ),
-                    Row(
-                      children:<Widget> [
-                        customButtom("C"),
-                        customButtom("0"),
-                        customButtom("="),
-                        // customButtom("÷"),
-                      ],
-                    ),
-                    Container(
-                      width: 400,
-
-                        child: ElevatedButton(
-                          style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.all(25.0),
-                            backgroundColor: Colors.white,
-
-                          ),
-                          onPressed:() {
-                            addExpense();
-                            // Navigator.pushNamed(context, 'home_page');
-                            Navigator.pop(context);
-                            Navigator.pop(context);
-                          },
-                          child: Text("SAVE", style: TextStyle(fontSize: 25.0, color: Colors.grey) ),
-
-                        ),
-
-                    ),
-
-                  ],
-                )
+              Expanded(
+                child: Container(
+                  height: 400,
+                  alignment: Alignment.bottomRight,
+                  child: Text("₹$texttodisplay",
+                      style: TextStyle(
+                          fontSize: 40.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white)),
                 ),
-              );
+              ),
+              Row(
+                children: <Widget>[
+                  customButtom("9"),
+                  customButtom("8"),
+                  customButtom("7"),
+                  // customButtom("+"),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  customButtom("6"),
+                  customButtom("5"),
+                  customButtom("4"),
+                  // customButtom("-"),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  customButtom("3"),
+                  customButtom("2"),
+                  customButtom("1"),
+                  // customButtom("x"),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  customButtom("C"),
+                  customButtom("0"),
+                  customButtom("="),
+                  // customButtom("÷"),
+                ],
+              ),
+              Container(
+                width: 400,
+                child: ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.all(25.0),
+                    backgroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    addExpense();
+                    // Navigator.pushNamed(context, 'home_page');
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  child: Text("SAVE",
+                      style: TextStyle(fontSize: 25.0, color: Colors.grey)),
+                ),
+              ),
+            ],
+          )),
+    );
   }
 }

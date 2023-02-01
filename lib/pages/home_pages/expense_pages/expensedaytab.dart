@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,29 +26,42 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
     return uid;
   }
 
-  int getExpenseDay() {
-    // super.initState();
-    int expenseDay = 0;
-    var stream1 = FirebaseFirestore.instance
-        .collection(FirestoreBuckets.users)
-        .doc(getEmail())
-        .collection(FirestoreBuckets.dates)
-        .doc(dateToday)
-        .collection(FirestoreBuckets.expenses)
-        .snapshots()
-        .listen((snap) {
-      final dateDocs = snap.docs.map((doc) => doc.data());
-
-      for (var dateData in dateDocs) {
-        if (dateData[FirestoreBuckets.expense] > 0) {
-          expenseDay =
-              expenseDay + int.parse(dateData[FirestoreBuckets.expense]);
-        }
-      }
+  late Future _future;
+  @override
+  void initState() {
+    setState(() {
+      _future = _sum();
     });
-    return expenseDay;
   }
 
+  void updateSum() {
+    setState(() {
+      _future = _sum();
+    });
+  }
+
+  // int getExpenseDay() {
+  //   // super.initState();
+  //   int expenseDay = 0;
+  //   var stream1 = FirebaseFirestore.instance
+  //       .collection(FirestoreBuckets.users)
+  //       .doc(getEmail())
+  //       .collection(FirestoreBuckets.dates)
+  //       .doc(dateToday)
+  //       .collection(FirestoreBuckets.expenses)
+  //       .snapshots()
+  //       .listen((snap) {
+  //     final dateDocs = snap.docs.map((doc) => doc.data());
+  //
+  //     for (var dateData in dateDocs) {
+  //       if (dateData[FirestoreBuckets.expense] > 0) {
+  //         expenseDay =
+  //             expenseDay + int.parse(dateData[FirestoreBuckets.expense]);
+  //       }
+  //     }
+  //   });
+  //   return expenseDay;
+  // }
 
   // Future<num> _sum() async => await FirebaseFirestore.instance
   //     .collection(FirestoreBuckets.users)
@@ -71,16 +86,21 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
   // );
 
   Future<num> _sum() async => FirebaseFirestore.instance
-      .collection(FirestoreBuckets.users)
-      .doc(getEmail()).collection(FirestoreBuckets.dates).doc(dateToday)
-      .collection(FirestoreBuckets.expenses).get().then((querySnapshot) {
-    num sum = 0;
-    querySnapshot.docs.forEach((element) {
-      num value = element.data()[FirestoreBuckets.expense];
-      sum += value;
-    });
-    return sum;
-  });
+          .collection(FirestoreBuckets.users)
+          .doc(getEmail())
+          .collection(FirestoreBuckets.dates)
+          .doc(dateToday)
+          .collection(FirestoreBuckets.expenses)
+          .get()
+          .then((querySnapshot) {
+        num sum = 0;
+        querySnapshot.docs.forEach((element) {
+          num value = element.data()[FirestoreBuckets.expense];
+          sum += value;
+        });
+        print(sum);
+        return sum;
+      });
 
   // int getExpenseDay(){
   //   var stream1 = FirebaseFirestore.instance
@@ -120,11 +140,6 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
     return map1[categoryName];
   }
 
-  // int getSum() async{
-  //   return await _sum();
-  // }
-
-  // late final TabController _tabController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,20 +157,21 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                   Expanded(
                     child: Container(
                       margin: const EdgeInsets.all(10.0),
-                      // height: 100.0,
-                      // width: 200.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                         color: Colors.green,
                       ),
-                      child: Center(
-                        child: Text(
-                          'You\'ve spent ₹${_sum()}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white),
+                      child: FutureBuilder(
+                        future: _future,
+                        builder: (context, snapshot) => Center(
+                          child: Text(
+                            'You\'ve spent ₹${snapshot.data}',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
@@ -164,7 +180,6 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                 ],
               ),
             ),
-
             Expanded(
               flex: 5,
               child: Container(
@@ -203,9 +218,13 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                                   textAlign: TextAlign.center,
                                 );
                               }
+                              final documents = snapshot.data?.docs;
                               String category =
                                   docData[FirestoreBuckets.categoryName];
                               int expense = docData[FirestoreBuckets.expense];
+                              if(expense == 0){
+                                return Container();
+                              }
                               // expenseDay = expenseDay + expense;
                               return TextButton(
                                 child: Container(
@@ -227,14 +246,15 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                                         SizedBox(
                                           height: 40.0,
                                           width: 40.0,
-                                          child:
-                                              Image.asset(imageRoute(category)!),
+                                          child: Image.asset(
+                                              imageRoute(category)!),
                                         ),
                                         // const SizedBox(width: 20.0),
                                         Text(
                                           category,
-                                          style: const TextStyle(fontSize: 22.0,
-                                          color: Colors.black),
+                                          style: const TextStyle(
+                                              fontSize: 22.0,
+                                              color: Colors.black),
                                         ),
                                         //const SizedBox(width: 18.0),
                                         Text(
@@ -250,10 +270,19 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                                   ),
                                 ),
                                 onPressed: () {
+                                  final docID = documents![index].id;
+                                  String dateToPass = dateToday;
+                                  int expenseToPass = expense;
+                                  String categoryToPass = category;
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => IncrementExpense(category: category, expenditureOld: expense))
-                                  );
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AddExpense(
+                                                category: categoryToPass,
+                                                oldAmount: expenseToPass,
+                                                docID: docID,
+                                                date: dateToPass,
+                                              )));
                                 },
                               );
                             },
@@ -291,6 +320,9 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
           ),
           onPressed: () {
             Navigator.pushNamed(context, 'expenseCategory');
+            setState(() {
+              _future = _sum();
+            });
           }),
     );
   }
