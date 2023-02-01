@@ -1,8 +1,8 @@
-import 'dart:async';
-
+// import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_money/nav_pages/goals/YourGoals/updateGoals.dart';
 import 'package:my_money/nav_pages/goals/goals_backend/buckets.firestore.dart';
 import 'package:my_money/nav_pages/goals/goals_backend/fields.firestore.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -15,8 +15,7 @@ class Your_Goal extends StatefulWidget {
 }
 
 class _Your_GoalState extends State<Your_Goal> {
-
-  String? getEmail(){
+  String? getEmail() {
     FirebaseAuth auth = FirebaseAuth.instance;
     String? uid = auth.currentUser!.email;
     return uid;
@@ -29,6 +28,10 @@ class _Your_GoalState extends State<Your_Goal> {
   //       .doc("$getEmail()")
   //       .collection(FirestoreBuckets.goals).doc().
   // }
+  // var ref = FirebaseFirestore.instance
+  //     .collection(FirestoreBuckets.users)
+  //     .doc(getEmail())
+  //     .collection(FirestoreBuckets.goals);
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +60,7 @@ class _Your_GoalState extends State<Your_Goal> {
                   itemBuilder: (___, int index) {
                     Map<String, dynamic> docData =
                         snapshot.data!.docs[index].data();
+                    final documents = snapshot.data?.docs;
 
                     if (docData.isEmpty) {
                       return const Text(
@@ -64,6 +68,7 @@ class _Your_GoalState extends State<Your_Goal> {
                         textAlign: TextAlign.center,
                       );
                     }
+                    // QuerySnapshot querySnapshot = snapshot.data as QuerySnapshot<Object?>;
                     String goalName = docData[FireStoreFields.goalName];
                     int savedAmount = docData[FireStoreFields.savedAmount];
                     int targetAmount = docData[FireStoreFields.targetAmount];
@@ -87,7 +92,7 @@ class _Your_GoalState extends State<Your_Goal> {
                         ),
                         children: [
                           LinearPercentIndicator(
-                            barRadius: Radius.circular(9.0),
+                            barRadius: const Radius.circular(9.0),
                             //leaner progress bar
                             animation: true,
                             animationDuration: 1000,
@@ -109,7 +114,15 @@ class _Your_GoalState extends State<Your_Goal> {
                           const SizedBox(height: 20),
                           Center(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                final docID = documents![index].id;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UpdateGoals(
+                                            docID: docID,
+                                            oldAmount: savedAmount)));
+                              },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white10,
                                   foregroundColor: Colors.black),
@@ -118,8 +131,13 @@ class _Your_GoalState extends State<Your_Goal> {
                           ),
                           Center(
                             child: ElevatedButton(
-                              onPressed: () {
-
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection(FirestoreBuckets.users)
+                                    .doc(getEmail())
+                                    .collection(FirestoreBuckets.goals)
+                                    .doc(documents![index].id)
+                                    .delete();
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white10,

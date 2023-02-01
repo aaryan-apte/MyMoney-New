@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 5,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: PrimaryColor,

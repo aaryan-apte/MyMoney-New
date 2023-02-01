@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../nav_pages/budgets/budget_backend/buckets.firestore.dart';
@@ -28,7 +27,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
   int getExpenseDay() {
     // super.initState();
     int expenseDay = 0;
-    FirebaseFirestore.instance
+    var stream1 = FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
         .doc(getEmail())
         .collection(FirestoreBuckets.dates)
@@ -47,6 +46,41 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
     });
     return expenseDay;
   }
+
+
+  // Future<num> _sum() async => await FirebaseFirestore.instance
+  //     .collection(FirestoreBuckets.users)
+  //     .doc(getEmail())
+  //     .collection(FirestoreBuckets.dates)
+  //     .doc(dateToday)
+  //     .collection(FirestoreBuckets.expenses)
+  //     .get()
+  //     .then((querySnapshot) async {
+  //   num sum = 0.0;
+  //   querySnapshot.docs.forEach((element) async {
+  //     // here I want to sum
+  //     querySnapshot.docs.forEach((element) async {
+  //       num value = element.data()[FirestoreBuckets.expense];
+  //       sum = sum + value;
+  //     });
+  //     print(sum);
+  //   }
+  //   );
+  //   return sum;
+  // }
+  // );
+
+  Future<num> _sum() async => FirebaseFirestore.instance
+      .collection(FirestoreBuckets.users)
+      .doc(getEmail()).collection(FirestoreBuckets.dates).doc(dateToday)
+      .collection(FirestoreBuckets.expenses).get().then((querySnapshot) {
+    num sum = 0;
+    querySnapshot.docs.forEach((element) {
+      num value = element.data()[FirestoreBuckets.expense];
+      sum += value;
+    });
+    return sum;
+  });
 
   // int getExpenseDay(){
   //   var stream1 = FirebaseFirestore.instance
@@ -86,6 +120,10 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
     return map1[categoryName];
   }
 
+  // int getSum() async{
+  //   return await _sum();
+  // }
+
   // late final TabController _tabController;
   @override
   Widget build(BuildContext context) {
@@ -112,7 +150,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                       ),
                       child: Center(
                         child: Text(
-                          'You\'ve spent ₹${getExpenseDay()}',
+                          'You\'ve spent ₹${_sum()}',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 25,
@@ -148,9 +186,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                           snapshot) {
                     if (snapshot.hasData && snapshot.data != null) {
-                      if (kDebugMode) {
-                        print("Total Documents: ${snapshot.data!.docs.length}");
-                      }
+                      print("Total Documents: ${snapshot.data!.docs.length}");
                       if (snapshot.data!.docs.isNotEmpty) {
                         return Expanded(
                           child: ListView.builder(

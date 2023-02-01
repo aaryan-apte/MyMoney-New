@@ -21,7 +21,7 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 4);
+    _tabController = TabController(vsync: this, length: 3);
     _tabController.addListener(_handleTabSelection);
   }
 
@@ -66,6 +66,7 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
           ),
         ),
         body: TabBarView(
+
           controller: _tabController,
           children: const [
             ExpenseDayTab(),

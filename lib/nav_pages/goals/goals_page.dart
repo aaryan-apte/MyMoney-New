@@ -1,12 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_money/nav_pages/goals/YourGoals.dart';
+// import 'package:my_money/nav_pages/goals/YourGoals.dart';
 import 'package:my_money/nav_pages/goals/YourGoals/Your_Goal.dart';
 import 'package:my_money/nav_pages/goals/enter_goal_page.dart';
-import 'package:my_money/nav_pages/goals/goals_backend/buckets.firestore.dart';
-import 'package:my_money/nav_pages/goals/goals_backend/fields.firestore.dart';
-import 'package:my_money/nav_pages/goals/trial_page.dart';
+// import 'package:my_money/nav_pages/goals/goals_backend/buckets.firestore.dart';
+// import 'package:my_money/nav_pages/goals/goals_backend/fields.firestore.dart';
+// import 'package:my_money/nav_pages/goals/trial_page.dart';
 // import 'package:my_money/nav_pages/budgets/budget_category_page.dart';
 // import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
 // import 'package:my_money/nav_pages/goals/enter_goal_page.dart';
@@ -41,10 +41,6 @@ class _GoalsPageState extends State<GoalsPage> {
 // final user1 =
 // FirebaseFirestore.instance.collection('users').doc(uid.toString()).snapshots();
 //
-
-
-
-
 
   //final List _goals = [];
 
@@ -84,27 +80,26 @@ class _GoalsPageState extends State<GoalsPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextButton(
-                    onPressed: () =>
-                    {Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const GoalEntry())
-                    )},
-                    child: Row(
-                      children: [
-                        Image.asset('assets/goals_icons/target.png'),
-                        Text(
-                          '       + CREATE GOAL',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        )
-                      ],
-                    )
-                  ),
+                      onPressed: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const GoalEntry()))
+                          },
+                      child: Row(
+                        children: [
+                          Image.asset('assets/goals_icons/target.png'),
+                          const Text(
+                            '           + CREATE GOAL',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        ],
+                      )),
                 ),
               ),
             ),
@@ -119,10 +114,7 @@ class _GoalsPageState extends State<GoalsPage> {
                   fontStyle: FontStyle.normal)),
             ),*/
 
-            SizedBox(
-              height: 10,
-            ),
-
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -140,32 +132,30 @@ class _GoalsPageState extends State<GoalsPage> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextButton(
-                      onPressed: () =>
-                      {Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => const Your_Goal())
-                      )},
-                      child: Row(
-                        children: [
-                          //Image.asset('assets/goals_icons/target.png'),
-                          Text(
-                            '                         Existing Goals ',
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          )
-                        ],
-                      )
+                    onPressed: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Your_Goal()))
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        //Image.asset('assets/goals_icons/target.png'),
+                        Text(
+                          'Existing Goals ',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontStyle: FontStyle.italic,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-
-
 
             /*Container(
               child: StreamBuilder(
@@ -217,9 +207,6 @@ class _GoalsPageState extends State<GoalsPage> {
                   },
               ),
             )*/
-
-
-
           ],
         ),
       ),
