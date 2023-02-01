@@ -22,6 +22,9 @@ class _IncomePageState extends State<IncomePage>
     return uid;
   }
 
+  int income = 0;
+  int totalSavings = 0;
+
   late Stream<DocumentSnapshot<Map<String, dynamic>>> incomeData;
 
   @override
@@ -78,9 +81,9 @@ class _IncomePageState extends State<IncomePage>
               Map<String, dynamic> docData =
                   snapshot.data!.data() as Map<String, dynamic>;
               if (docData.isNotEmpty) {
-                int income = docData[FirestoreBuckets.income];
+                income = docData[FirestoreBuckets.income];
                 incomeToPass = income;
-                int totalSavings = docData[FirestoreBuckets.totalSavings];
+                totalSavings = docData[FirestoreBuckets.totalSavings];
                 return Column(
                   children: [
                     Container(
@@ -157,7 +160,6 @@ class _IncomePageState extends State<IncomePage>
             ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
         backgroundColor: Colors.blue[900],
         onPressed: () {
           Navigator.push(
@@ -165,6 +167,7 @@ class _IncomePageState extends State<IncomePage>
               MaterialPageRoute(
                   builder: (context) => AddIncome(income: incomeToPass)));
         },
+        child: const Icon(Icons.add),
       ),
     );
     // return Column(

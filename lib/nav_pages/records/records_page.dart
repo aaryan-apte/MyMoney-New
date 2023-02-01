@@ -14,7 +14,7 @@ class RecordPage extends StatefulWidget {
 
 class _RecordPageState extends State<RecordPage> {
   final TextEditingController _textDate = TextEditingController();
-  // DateTime dateTemp = DateTime.now();
+
   String datePicked = "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
 
   String? getEmail() {
@@ -133,58 +133,51 @@ class _RecordPageState extends State<RecordPage> {
                                   docData[FirestoreBuckets.categoryName];
                               int expense = docData[FirestoreBuckets.expense];
                               // expenseDay = expenseDay + expense;
-                              return TextButton(
-                                child: Container(
-                                  height: 65.0,
-                                  margin: const EdgeInsets.only(
-                                      top: 8.0, left: 6.0, right: 6.0),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      color: Colors.white),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 13.0, right: 13.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          height: 40.0,
-                                          width: 40.0,
-                                          child: Image.asset(
-                                              imageRoute(category)!),
-                                        ),
-                                        // const SizedBox(width: 20.0),
-                                        Text(
-                                          category,
-                                          style: const TextStyle(
-                                              fontSize: 22.0,
-                                              color: Colors.black),
-                                        ),
-                                        //const SizedBox(width: 18.0),
-                                        Text(
-                                          "₹$expense",
-                                          textAlign: TextAlign.end,
-                                          style: const TextStyle(
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.black),
-                                        )
-                                      ],
-                                    ),
+                              if(expense == 0){
+                                return Container();
+                              }
+                              return Container(
+                                height: 65.0,
+                                width: double.infinity,
+                                margin: const EdgeInsets.only(
+                                    top: 18.0, left: 13.0, right: 13.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    color: Colors.white),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 17.0, right: 17.0,),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 40.0,
+                                        width: 40.0,
+                                        child: Image.asset(
+                                            imageRoute(category)!),
+                                      ),
+                                      // const SizedBox(width: 20.0),
+                                      Text(
+                                        category,
+                                        style: const TextStyle(
+                                            fontSize: 22.0,
+                                            color: Colors.black),
+                                      ),
+                                      //const SizedBox(width: 18.0),
+                                      Text(
+                                        "₹$expense",
+                                        textAlign: TextAlign.end,
+                                        style: const TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                      )
+                                    ],
                                   ),
                                 ),
-                                onPressed: () {
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             AddExpense(
-                                  //                 category: category,
-                                  //                 expenditureOld: expense)));
-                                },
                               );
                             },
                           ),

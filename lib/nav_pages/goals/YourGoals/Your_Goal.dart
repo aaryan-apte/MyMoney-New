@@ -107,7 +107,7 @@ class _Your_GoalState extends State<Your_Goal> {
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white),
                             ),
-                            linearStrokeCap: LinearStrokeCap.roundAll,
+                            // linearStrokeCap: LinearStrokeCap.roundAll,
                             progressColor: Colors.blueAccent,
                             backgroundColor: Colors.grey[300],
                           ),
