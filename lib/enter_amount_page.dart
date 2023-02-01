@@ -31,15 +31,77 @@ class _EnterAmountState extends State<EnterAmount> {
     var dateToday =
         "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
 
-    final user1 = FirebaseFirestore.instance
+    final userDay = FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
         .doc(email)
         .collection(FirestoreBuckets.dates)
+        .doc((DateTime.now().year.toString()))
+        .collection(DateTime.now().month.toString())
         .doc(dateToday)
-        .collection(FirestoreBuckets.expenses);
+        .collection(FirestoreBuckets.expenses)
+        .doc(category);
+
+    final userMonth = FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(email)
+        .collection(FirestoreBuckets.dates)
+        .doc(DateTime.now().year.toString())
+        .collection(DateTime.now().month.toString()).doc(FirestoreBuckets.expenses)
+        .collection(FirestoreBuckets.expenses).doc(category);
+
+    final userYear = FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(email)
+        .collection(FirestoreBuckets.dates)
+        .doc(DateTime.now().year.toString())
+        .collection(FirestoreBuckets.expenses)
+        .doc(category);
 
     try {
-      await user1.add(map1).then((value) => print("Success"));
+      userDay.get().then((doc) async {
+        if(doc.exists){
+          await userDay.update({FirestoreBuckets.expense: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("Success"));
+        }
+        else{
+          await userDay.set(map1).then((value) => print("Success"));
+        }
+      });
+
+      userMonth.get().then((doc) async {
+        if(doc.exists){
+          await userMonth.update({FirestoreBuckets.expense: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("Success"));
+        }
+        else{
+          await userMonth.set(map1).then((value) => print("Success"));
+        }
+      });
+
+      userYear.get().then((doc) async {
+        if(doc.exists){
+          await userYear.update({FirestoreBuckets.expense: FieldValue.increment(int.parse(texttodisplay))}).then((value) => print("Success"));
+        }
+        else{
+          await userYear.set(map1).then((value) => print("Success"));
+        }
+      });
+      // if(userDay.get().then((value) => null) != null){
+      //   await userDay.update(map1).then((value) => print("Success"));
+      // } else{
+      //   await userDay.set(map1).then((value) => print("Success"));
+      // }
+      // if(userMonth.get() != null){
+      //   await userMonth.update(map1).then((value) => print("Success"));
+      // } else{
+      //   await userMonth.set(map1).then((value) => print("Success"));
+      // }
+      // if(userYear.get() != null){
+      //   await userYear.update(map1).then((value) => print("Success"));
+      // } else{
+      //   await userDay.set(map1).then((value) => print("Success"));
+      // }
+      // await userMonth.set(map1).then((value) => print("Success"));
+      // await userYear.set(map1).then((value) => print("Success"));
+
     } catch (e) {
       print(e.toString());
     }

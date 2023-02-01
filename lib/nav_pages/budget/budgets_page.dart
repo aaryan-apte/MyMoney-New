@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:my_money/nav_pages/budgets/budget_backend/buckets.firestore.dart';
 // import 'package:my_money/nav_pages/budgets/budget_category_page.dart';
 // import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
-import 'iconMap.dart';
+// import 'iconMap.dart';
 
 class BudgetPage extends StatefulWidget {
   const BudgetPage({Key? key}) : super(key: key);
@@ -138,19 +138,6 @@ class _BudgetPageState extends State<BudgetPage> {
                     if (snapshot.hasData && snapshot.data != null) {
                       print("Total Documents: ${snapshot.data!.docs.length}");
                       if (snapshot.data!.docs.isNotEmpty) {
-                        // return ListView.separated(
-                        //   itemBuilder: (context, int index) {
-                        //     Map<String, dynamic> docData =
-                        //         snapshot.data!.docs[index].data();
-                        //
-                        //     if (docData.isEmpty) {
-                        //       return const Text(
-                        //         "Document is Empty",
-                        //         textAlign: TextAlign.center,
-                        //       );
-                        //     }
-
-                        // int targetAmount = docData[FireStoreFields.targetAmount];
                         return Expanded(
                           child: ListView.builder(
                             scrollDirection: Axis.vertical,
@@ -171,7 +158,7 @@ class _BudgetPageState extends State<BudgetPage> {
                               int budget = docData[FirestoreBuckets.budget];
                               return Container(
                                 height: 65.0,
-                                margin: EdgeInsets.only(top:16.0, left: 14.0, right: 14.0),
+                                margin: const EdgeInsets.only(top:16.0, left: 14.0, right: 14.0),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
                                     color: Colors.white),

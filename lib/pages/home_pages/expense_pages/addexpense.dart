@@ -95,29 +95,82 @@ class _AddExpenseState extends State<AddExpense> {
     oldAmount = widget.oldAmount;
     docID = widget.docID;
     category = widget.category;
-    date = widget.date;
+    // date = widget.date;
   }
 
   TextEditingController expenseToAdd = TextEditingController();
 
   Future<void> updateExpense() async {
-    final String? uid = FirebaseAuth.instance.currentUser?.email;
+    // var date = DateTime.now();
+    var dateToday = "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
+    final String? email = FirebaseAuth.instance.currentUser?.email;
 
     Map<String, dynamic> map1 = {
       "categoryName": category,
       "expense": int.parse(expenseToAdd.text.trim())
     };
 
-    final user1 = FirebaseFirestore.instance
+    final userDay = FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
-        .doc(uid.toString())
+        .doc(email)
         .collection(FirestoreBuckets.dates)
-        .doc(date)
+        .doc((DateTime.now().year.toString()))
+        .collection(DateTime.now().month.toString())
+        .doc(dateToday)
         .collection(FirestoreBuckets.expenses)
-        .doc(docID);
+        .doc(category);
+
+    final userMonth = FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(email)
+        .collection(FirestoreBuckets.dates)
+        .doc(DateTime.now().year.toString())
+        .collection(DateTime.now().month.toString())
+        .doc(FirestoreBuckets.expenses)
+        .collection(FirestoreBuckets.expenses)
+        .doc(category);
+
+    final userYear = FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(email)
+        .collection(FirestoreBuckets.dates)
+        .doc(DateTime.now().year.toString())
+        .collection(FirestoreBuckets.expenses)
+        .doc(category);
 
     try {
-      await user1.update(map1).then((value) => print("Success"));
+      await userDay.set(map1).then((value) => print("Success"));
+      await userMonth.set(map1).then((value) => print("Success"));
+      await userYear.set(map1).then((value) => print("Success"));
+      // userDay.get().then((doc) async {
+      //   if (doc.exists) {
+      //     await userDay.set(map1).then((value) => print("Success"));
+      //   } else {
+      //     await userDay.set(map1).then((value) => print("Success"));
+      //   }
+      // });
+      //
+      // userMonth.get().then((doc) async {
+      //   if (doc.exists) {
+      //     await userMonth.update({
+      //       FirestoreBuckets.expense:
+      //           FieldValue.increment(int.parse(expenseToAdd.text.trim()))
+      //     }).then((value) => print("Success"));
+      //   } else {
+      //     await userMonth.set(map1).then((value) => print("Success"));
+      //   }
+      // });
+      //
+      // userYear.get().then((doc) async {
+      //   if (doc.exists) {
+      //     await userYear.update({
+      //       FirestoreBuckets.expense:
+      //           FieldValue.increment(int.parse(expenseToAdd.text.trim()))
+      //     }).then((value) => print("Success"));
+      //   } else {
+      //     await userYear.set(map1).then((value) => print("Success"));
+      //   }
+      // });
     } catch (e) {
       print(e.toString());
     }
@@ -198,7 +251,8 @@ class _AddExpenseState extends State<AddExpense> {
                           controller: expenseToAdd,
                           decoration: InputDecoration(
                               hintText: "Total expense for $category",
-                              hintStyle: const TextStyle(color: Colors.white38)),
+                              hintStyle:
+                                  const TextStyle(color: Colors.white38)),
                           keyboardType: TextInputType.number,
                           cursorColor: Colors.white,
                           style: const TextStyle(

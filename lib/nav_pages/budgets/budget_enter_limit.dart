@@ -3,7 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:my_money/nav_pages/budgets/budget_backend/buckets.firestore.dart';
+// import 'package:flutter/services.dart';
 // import 'package:my_money/nav_pages/budgets/budgets_page.dart';
 // import 'package:my_money/pages/select_category/expense_category.dart';
 // import 'package:my_money/pages/select_category/income_category.dart';
@@ -26,15 +27,20 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
   Future<void> addBudget() async {
     final String? uid = FirebaseAuth.instance.currentUser?.email;
 
-    Map<String, dynamic> map1 = {"categoryName": budgetCategoryAdd, "budget": int.parse(texttodisplay)};
+    Map<String, dynamic> map1 = {
+      "categoryName": budgetCategoryAdd,
+      "budget": int.parse(texttodisplay)
+    };
 
     final user1 = FirebaseFirestore.instance
-        .collection('users')
+        .collection(FirestoreBuckets.users)
         .doc(uid.toString())
-        .collection('budgets');
+        .collection(FirestoreBuckets.budgets)
+        .doc(budgetCategoryAdd);
 
     try {
-      await user1.add(map1).then((value) => print("Success"));
+      // if(user1.)
+      await user1.set(map1).then((value) => print("Success"));
     } catch (e) {
       print(e.toString());
     }
@@ -89,7 +95,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
       child: Container(
         child: OutlinedButton(
           style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.all(25.0),
+            padding: const EdgeInsets.all(25.0),
             backgroundColor: Colors.white,
           ),
           onPressed: () => btnclicked(btnval),

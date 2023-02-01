@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../pages/home_pages/expense_pages/addexpense.dart';
+// import '../../pages/home_pages/expense_pages/addexpense.dart';
 import '../budgets/budget_backend/buckets.firestore.dart';
 
 class RecordPage extends StatefulWidget {
@@ -42,12 +42,15 @@ class _RecordPageState extends State<RecordPage> {
     'Transport': 'assets/expense_icons/metro.png',
   };
 
+  List<String> list1 = [];
+
   String? imageRoute(String categoryName) {
     return map1[categoryName];
   }
 
   @override
   Widget build(BuildContext context) {
+    final String? email = FirebaseAuth.instance.currentUser?.email;
     return Scaffold(
       backgroundColor: Colors.white70,
       appBar: AppBar(
@@ -101,9 +104,11 @@ class _RecordPageState extends State<RecordPage> {
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection(FirestoreBuckets.users)
-                      .doc(getEmail())
+                      .doc(email)
                       .collection(FirestoreBuckets.dates)
-                      .doc(datePicked.toString())
+                      .doc((DateTime.now().year.toString()))
+                      .collection(DateTime.now().month.toString())
+                      .doc(datePicked)
                       .collection(FirestoreBuckets.expenses)
                       .snapshots(),
                   builder: (context,
@@ -132,6 +137,13 @@ class _RecordPageState extends State<RecordPage> {
                               String category =
                                   docData[FirestoreBuckets.categoryName];
                               int expense = docData[FirestoreBuckets.expense];
+                              // bool check = true;
+
+                              // for(int i = 0; i < list1.length; i++){
+                              //   if(category == list1[i]){
+                              //
+                              //   }
+                              // }
                               // expenseDay = expenseDay + expense;
                               if(expense == 0){
                                 return Container();

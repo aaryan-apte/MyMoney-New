@@ -1,4 +1,4 @@
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,14 +29,15 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
   late Future _future;
   @override
   void initState() {
+    getBudgetandExpense();
     setState(() {
-      _future = _sum();
+      _future = _sumDay();
     });
   }
 
   void updateSum() {
     setState(() {
-      _future = _sum();
+      _future = _sumDay();
     });
   }
 
@@ -85,12 +86,18 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
   // }
   // );
 
-  Future<num> _sum() async => FirebaseFirestore.instance
-          .collection(FirestoreBuckets.users)
-          .doc(getEmail())
-          .collection(FirestoreBuckets.dates)
-          .doc(dateToday)
-          .collection(FirestoreBuckets.expenses)
+  late num expense;
+  late num budget;
+  final String? email = FirebaseAuth.instance.currentUser?.email;
+
+  Future<num> _sumDay() async => FirebaseFirestore.instance
+      .collection(FirestoreBuckets.users)
+      .doc(email)
+      .collection(FirestoreBuckets.dates)
+      .doc((DateTime.now().year.toString()))
+      .collection(DateTime.now().month.toString())
+      .doc(dateToday)
+      .collection(FirestoreBuckets.expenses)
           .get()
           .then((querySnapshot) {
         num sum = 0;
@@ -101,6 +108,41 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
         print(sum);
         return sum;
       });
+
+  getBudgetandExpense () {
+    FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(getEmail())
+        .collection(FirestoreBuckets.dates)
+        .doc(dateToday)
+        .collection(FirestoreBuckets.expenses)
+        .get()
+        .then((querySnapshot){
+      num sum = 0;
+      querySnapshot.docs.forEach((element) {
+        num value = element.data()[FirestoreBuckets.expense];
+        sum += value;
+      });
+      expense = sum;
+      }).then((value) => {
+    FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(getEmail())
+        .collection(FirestoreBuckets.budgets)
+        .get()
+        .then((querySnapshot){
+      num sum = 0;
+      querySnapshot.docs.forEach((element) {
+        print(element.data());
+        num value = element.data()[FirestoreBuckets.budget];
+        sum += value;
+      });
+      budget = sum;
+      print("$budget   hehehehe    $expense");
+    })
+    });
+
+  }
 
   // int getExpenseDay(){
   //   var stream1 = FirebaseFirestore.instance
@@ -142,6 +184,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
 
   @override
   Widget build(BuildContext context) {
+    final String? email = FirebaseAuth.instance.currentUser?.email;
     return Scaffold(
       // appBar: AppBar(
       body: Padding(
@@ -192,8 +235,10 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection(FirestoreBuckets.users)
-                      .doc(getEmail())
+                      .doc(email)
                       .collection(FirestoreBuckets.dates)
+                      .doc((DateTime.now().year.toString()))
+                      .collection(DateTime.now().month.toString())
                       .doc(dateToday)
                       .collection(FirestoreBuckets.expenses)
                       .snapshots(),
@@ -321,7 +366,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
           onPressed: () {
             Navigator.pushNamed(context, 'expenseCategory');
             setState(() {
-              _future = _sum();
+              _future = _sumDay();
             });
           }),
     );
