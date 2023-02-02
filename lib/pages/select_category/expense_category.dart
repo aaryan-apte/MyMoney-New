@@ -13,20 +13,21 @@ class _ExpenseCategoryState extends State<ExpenseCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blue[900],
       body: Column(children: [
-        Expanded(
-          child: Container(
-            height: 200,
-            decoration: const BoxDecoration(
-              color: Color(0xffe91e63),
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(60),
-                bottomLeft: Radius.circular(60),
-              ),
-            ),
-          ),
-        ),
+        SizedBox(height: 90.0,),
+        // Expanded(
+        //   child: Container(
+        //     height: 200,
+        //     decoration: BoxDecoration(
+        //       color: Colors.blue[900],
+        //       borderRadius: const BorderRadius.only(
+        //         bottomRight: Radius.circular(60),
+        //         bottomLeft: Radius.circular(60),
+        //       ),
+        //     ),
+        //   ),
+        // ),
         const SizedBox(height: 20),
         Expanded(
           flex: 3,
@@ -46,8 +47,8 @@ class _ExpenseCategoryState extends State<ExpenseCategory> {
                     child: Center(
                         child: Text("Pick up a Category",
                             style: TextStyle(
-                                color: Color(0xffe91e63),
-                                fontSize: 22,
+                                color: Colors.black,
+                                fontSize: 26,
                                 fontWeight: FontWeight.w500)))),
                 Row(
                   children: [

@@ -55,7 +55,7 @@ class _RecordPageState extends State<RecordPage> {
       backgroundColor: Colors.white70,
       appBar: AppBar(
         title: const Center(child: Text('Records')),
-        backgroundColor: Colors.yellow[800],
+        backgroundColor: Colors.blue[900],
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -97,7 +97,7 @@ class _RecordPageState extends State<RecordPage> {
               child: Container(
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Colors.yellow[800],
+                  color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(17.0),
                 ),
                 width: double.infinity,

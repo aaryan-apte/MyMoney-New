@@ -48,7 +48,7 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
               borderRadius: BorderRadius.circular(
                 25.0,
               ),
-              color: Colors.green,
+              color: Colors.blue[400],
             ),
             labelColor: Colors.white,
             unselectedLabelColor: Colors.black,

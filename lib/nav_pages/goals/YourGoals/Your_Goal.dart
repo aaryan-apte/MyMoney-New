@@ -41,7 +41,7 @@ class _Your_GoalState extends State<Your_Goal> {
           "Your Goals",
           style: TextStyle(fontSize: 24.0),
         ),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blue[900],
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -73,8 +73,9 @@ class _Your_GoalState extends State<Your_Goal> {
                     int savedAmount = docData[FireStoreFields.savedAmount];
                     int targetAmount = docData[FireStoreFields.targetAmount];
                     return Card(
+                      margin: const EdgeInsets.all(10.0),
                       elevation: 7,
-                      color: Colors.lightGreen,
+                      color: Colors.blue[900],
                       child: ExpansionTile(
                         iconColor: Colors.white,
                         collapsedIconColor: Colors.white,
@@ -86,8 +87,8 @@ class _Your_GoalState extends State<Your_Goal> {
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 21,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w600,
+                            // fontStyle: FontStyle.italic,
                           ),
                         ),
                         children: [
@@ -98,14 +99,14 @@ class _Your_GoalState extends State<Your_Goal> {
                             animationDuration: 1000,
                             lineHeight: 20.0,
                             percent: savedAmount / targetAmount,
-                            leading: Text("Rs $savedAmount"),
-                            trailing: Text("Rs $targetAmount"),
+                            leading: Text("₹$savedAmount", style: TextStyle(color: Colors.white, fontSize: 19.0),),
+                            trailing: Text("₹$targetAmount", style: TextStyle(color: Colors.white, fontSize: 19.0)),
                             center: Text(
                               "${((savedAmount / targetAmount) * 100).toStringAsFixed(0)}%",
                               style: const TextStyle(
                                   fontSize: 12.0,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                                  color: Colors.black),
                             ),
                             // linearStrokeCap: LinearStrokeCap.roundAll,
                             progressColor: Colors.blueAccent,
@@ -124,7 +125,7 @@ class _Your_GoalState extends State<Your_Goal> {
                                             oldAmount: savedAmount)));
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white10,
+                                  backgroundColor: Colors.blue[100],
                                   foregroundColor: Colors.black),
                               child: const Text("Update Saved Amount"),
                             ),
@@ -140,7 +141,7 @@ class _Your_GoalState extends State<Your_Goal> {
                                     .delete();
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white10,
+                                  backgroundColor: Colors.blue[100],
                                   foregroundColor: Colors.black),
                               child: const Text("Set Goal As Reached"),
                             ),

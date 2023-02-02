@@ -51,9 +51,9 @@ class _BudgetPageState extends State<BudgetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.blue[900],
         title: const Center(
           child: Text(
             "Budgets",
@@ -63,7 +63,7 @@ class _BudgetPageState extends State<BudgetPage> {
         ),
       ),
       body: Container(
-        color: Colors.lightBlueAccent,
+        color: Colors.white,
         child: Column(
           children: [
             const SizedBox(
@@ -73,9 +73,9 @@ class _BudgetPageState extends State<BudgetPage> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: 80,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(60),
                     topRight: Radius.circular(60),
                     bottomRight: Radius.circular(60),
@@ -95,12 +95,13 @@ class _BudgetPageState extends State<BudgetPage> {
                           'assets/budget_icons/budgeting2.png',
                         ),
                         const Text(
-                          '          + CREATE BUDGET',
+                          '         + SET BUDGET',
                           style: TextStyle(
-                              color: Colors.purple,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic),
+                              color: Colors.black,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                             // fontStyle: FontStyle.italic
+                            ),
                         ),
                       ],
                     ),
@@ -110,11 +111,11 @@ class _BudgetPageState extends State<BudgetPage> {
             ),
             const SizedBox(height: 10),
             Container(
-              child: const Text("Your Budgets",
+              child: Text("Your Budgets",
                   style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
+                      color: Colors.blue[900],
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.normal)),
             ),
             const SizedBox(height: 10),
@@ -122,7 +123,7 @@ class _BudgetPageState extends State<BudgetPage> {
               child: Container(
                 margin: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey[800],
+                  color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(17.0),
                 ),
                 width: double.infinity,

@@ -52,14 +52,14 @@ class _GoalsPageState extends State<GoalsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blue[900],
         title: const Center(
           child: Text("Goals",
-              style: TextStyle(color: Colors.white, fontSize: 20)),
+              style: TextStyle(color: Colors.white, fontSize: 28)),
         ),
       ),
       body: Container(
-        color: Colors.lightGreen,
+        color: Colors.blue[100],
         child: Column(
           children: [
             const SizedBox(height: 15),
@@ -90,12 +90,12 @@ class _GoalsPageState extends State<GoalsPage> {
                         children: [
                           Image.asset('assets/goals_icons/target.png'),
                           const Text(
-                            '           + CREATE GOAL',
+                            '           + SET GOAL',
                             style: TextStyle(
-                              color: Colors.green,
+                              color: Colors.black,
                               fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w500,
+                             // fontStyle: FontStyle.italic,
                             ),
                           )
                         ],
@@ -138,15 +138,15 @@ class _GoalsPageState extends State<GoalsPage> {
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         //Image.asset('assets/goals_icons/target.png'),
                         Text(
                           'Existing Goals ',
                           style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.italic,
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            //fontStyle: FontStyle.italic,
                           ),
                           textAlign: TextAlign.center,
                         )

@@ -55,8 +55,8 @@ class _GoalEntryState extends State<GoalEntry> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('               New Goal'),
-        backgroundColor: Colors.orange,
+        title: const Text('             New Goal', style:  TextStyle(fontSize: 24.0),),
+        backgroundColor: Colors.blue[900],
       ),
       body: Container(
         padding: const EdgeInsets.all(10),
@@ -115,9 +115,9 @@ class _GoalEntryState extends State<GoalEntry> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 height: 70,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(60),
                     topRight: Radius.circular(60),
                     bottomRight: Radius.circular(60),
@@ -139,10 +139,11 @@ class _GoalEntryState extends State<GoalEntry> {
                             child: const Text(
                               ' SAVE GOAL ',
                               style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w500,
-                                  fontStyle: FontStyle.italic),
+                                  //fontStyle: FontStyle.italic
+                              ),
                             ),
                             onPressed: () {
                               addGoal();

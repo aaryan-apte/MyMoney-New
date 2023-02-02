@@ -202,7 +202,7 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
                       margin: const EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.green,
+                        color: Colors.blue[100],
                       ),
                       child: FutureBuilder(
                         future: _future,
@@ -213,7 +213,7 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
                             style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w300,
-                                color: Colors.white),
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -228,7 +228,7 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
               child: Container(
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey[800],
+                  color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(17.0),
                 ),
                 width: double.infinity,
@@ -272,7 +272,7 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
                               return Container(
                                 height: 65.0,
                                 margin: const EdgeInsets.only(
-                                    top: 8.0, left: 6.0, right: 6.0),
+                                    top: 16.0, left: 14.0, right: 14.0),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
                                     color: Colors.white),

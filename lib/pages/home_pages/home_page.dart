@@ -16,7 +16,7 @@ import 'package:my_money/pages/signup/register.dart';
 import 'package:my_money/pages/signup/input.dart';
 import 'package:my_money/pages/homepage/expensetoptabs.dart';*/
 
-Color PrimaryColor = Color(0xff3f51b5);
+Color? PrimaryColor = Colors.blue[900];
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -35,9 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
             backgroundColor: PrimaryColor,
             title: Center(
               child: Text(
-                "Paisa 'o Paisa",
+                "MyMoney",
                 style: TextStyle(
-                  fontSize: 26.0,
+                  fontSize: 28.0,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.w800
                 ),
@@ -53,12 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   () {
                     switch (index) {
                       case 0:
-                        PrimaryColor = Colors.blue[900]!;
+                        // PrimaryColor = Colors.blue[900]!;
                         // Navigator.push(context,
                         // MaterialPageRoute(builder: (context) => IncomeTopTabs(colorVal)));
                         break;
                       case 1:
-                        PrimaryColor = Colors.blue[900]!;
+                        // PrimaryColor = Colors.blue[900]!;
                         break;
                       //case 2:
                       //PrimaryColor=Color(0xffe91e63);

@@ -60,7 +60,7 @@ class _AddIncomeState extends State<AddIncome> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.blue[900]
+                  color: Colors.blue[100]
                 ),
                 margin: const EdgeInsets.only(top: 54.0, left: 11.0, right: 11.0, bottom: 54.0),
                 child: Padding(
@@ -71,7 +71,7 @@ class _AddIncomeState extends State<AddIncome> {
                       const Text(
                         "Your previous income was",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 23.0
                         ),
                         textAlign: TextAlign.center,
@@ -80,7 +80,7 @@ class _AddIncomeState extends State<AddIncome> {
                       Text(
                         "₹ $income",
                         style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 25.0,
                           fontWeight: FontWeight.w600,
                         ),
@@ -90,17 +90,17 @@ class _AddIncomeState extends State<AddIncome> {
                         width: MediaQuery.of(context).size.width/2,
                         child: TextField(
                           controller: incomeToAdd,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             hintText: "Enter new salary",
                             hintStyle: TextStyle(
-                              color: Colors.white38
+                              color: Colors.blue[400]
                             )
                           ),
                           keyboardType: TextInputType.number,
                           cursorColor: Colors.white,
 
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 20.0
                           ),
                         ),
@@ -113,7 +113,7 @@ class _AddIncomeState extends State<AddIncome> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.blue[900],
                               borderRadius: BorderRadius.circular(10.0)
                             ),
                             child: Padding(
@@ -121,7 +121,7 @@ class _AddIncomeState extends State<AddIncome> {
                               child: Text(
                                 "Update Income",
                                 style: TextStyle(
-                                  color: Colors.blue[900],
+                                  color: Colors.white,
                                   fontSize: 20.0
                                 ),
                               ),

@@ -150,16 +150,14 @@ class _EnterAmountState extends State<EnterAmount> {
 
   Widget customButtom(String btnval) {
     return Expanded(
-      child: Container(
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.all(25.0),
-            backgroundColor: Colors.white,
-          ),
-          onPressed: () => btnclicked(btnval),
-          child: Text(btnval,
-              style: TextStyle(fontSize: 25.0, color: Colors.black)),
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          padding: EdgeInsets.all(25.0),
+          backgroundColor: Colors.white,
         ),
+        onPressed: () => btnclicked(btnval),
+        child: Text(btnval,
+            style: TextStyle(fontSize: 25.0, color: Colors.black)),
       ),
     );
   }
@@ -168,10 +166,10 @@ class _EnterAmountState extends State<EnterAmount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue[900],
         title: const Text("Enter the Amount",
             style: TextStyle(
-              color: Color(0xffe91e63),
+              color: Colors.white,
             )),
       ),
       //backgroundColor: Colors.grey,
@@ -221,8 +219,8 @@ class _EnterAmountState extends State<EnterAmount> {
               ),*/
       body: Container(
           //height: 650,
-          decoration: const BoxDecoration(
-            color: Color(0xffe91e63),
+          decoration: BoxDecoration(
+            color: Colors.blue[100],
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -246,8 +244,8 @@ class _EnterAmountState extends State<EnterAmount> {
                   child: Text("₹$texttodisplay",
                       style: TextStyle(
                           fontSize: 40.0,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white)),
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black)),
                 ),
               ),
               Row(
@@ -296,7 +294,7 @@ class _EnterAmountState extends State<EnterAmount> {
                     Navigator.pop(context);
                   },
                   child: Text("SAVE",
-                      style: TextStyle(fontSize: 25.0, color: Colors.grey)),
+                      style: TextStyle(fontSize: 25.0, color: Colors.black)),
                 ),
               ),
             ],

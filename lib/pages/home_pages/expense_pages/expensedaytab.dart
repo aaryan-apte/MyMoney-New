@@ -202,7 +202,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                       margin: const EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.green,
+                        color: Colors.blue[100],
                       ),
                       child: FutureBuilder(
                         future: _future,
@@ -213,7 +213,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                             style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w300,
-                                color: Colors.white),
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -228,7 +228,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
               child: Container(
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey[800],
+                  color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(17.0),
                 ),
                 width: double.infinity,
@@ -275,7 +275,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                                 child: Container(
                                   height: 65.0,
                                   margin: const EdgeInsets.only(
-                                      top: 8.0, left: 6.0, right: 6.0),
+                                      top: 6.0, left: 6.0, right: 6.0),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10.0),
                                       color: Colors.white),
@@ -358,7 +358,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
       ),
       floatingActionButton: FloatingActionButton(
           elevation: 10.0,
-          backgroundColor: Colors.blue[900],
+          backgroundColor: Colors.indigo[800],
           child: const CircleAvatar(
             radius: 30.0,
             child: Icon(Icons.add),

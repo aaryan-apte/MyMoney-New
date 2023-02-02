@@ -31,7 +31,7 @@ class _MyLogin1State extends State<MyLogin> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.cyan[900],
+        backgroundColor: Colors.blue[100],
         body: SingleChildScrollView(
           padding: EdgeInsets.all(22.0),
           child: Column(
@@ -41,19 +41,21 @@ class _MyLogin1State extends State<MyLogin> {
                 height: 90,
               ),
               CircleAvatar(
+                backgroundColor: Colors.transparent,
+
                 radius: 60.0,
-                child: Image.asset('assets/images/mymoney_logo.png'),
+                child: Image.asset('assets/images/logo.jpg'),
               ),
               SizedBox(
                 height: 45.0,
               ),
               Text(
-                'Welcome to MyMoney',
+                'Save More with MyMoney',
                 style: TextStyle(
                   fontFamily: 'CrimsonText',
                   // fontStyle: FontStyle.italic,
                   fontSize: 30.0,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               SizedBox(
@@ -61,7 +63,7 @@ class _MyLogin1State extends State<MyLogin> {
               ),
               TextField(
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 20.0,
                 ),
                 controller: emailController,
@@ -70,14 +72,14 @@ class _MyLogin1State extends State<MyLogin> {
                 decoration: InputDecoration(
                     labelText: "Email",
                     labelStyle:
-                        TextStyle(color: Colors.white38, fontSize: 18.0)),
+                        TextStyle(color: Colors.black54, fontSize: 18.0)),
               ),
               SizedBox(
                 height: 5,
               ),
               TextField(
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 20.0,
                 ),
                 controller: passwordController,
@@ -87,7 +89,7 @@ class _MyLogin1State extends State<MyLogin> {
                 decoration: InputDecoration(
                     labelText: "Password",
                     labelStyle:
-                        TextStyle(color: Colors.white38, fontSize: 18.0)),
+                        TextStyle(color: Colors.black54, fontSize: 18.0)),
               ),
               SizedBox(
                 height: 30,
@@ -98,7 +100,7 @@ class _MyLogin1State extends State<MyLogin> {
                 child: ElevatedButton.icon(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.lightGreen[600]),
+                        MaterialStateProperty.all(Colors.blue[900]),
                   ),
                   onPressed: () {
                     logIn();
@@ -120,7 +122,7 @@ class _MyLogin1State extends State<MyLogin> {
                 children: [
                   Text(
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontFamily: 'CrimsonText',
                         fontSize: 16),
                     'New to us?  ',
@@ -130,7 +132,7 @@ class _MyLogin1State extends State<MyLogin> {
                       'Sign Up',
                       style: TextStyle(
                         decoration: TextDecoration.underline,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontFamily: 'CrimsonText',
                         fontSize: 16,
                         fontStyle: FontStyle.italic,

@@ -23,8 +23,6 @@ class MyRegister extends StatefulWidget {
 
 class _MyRegisterState extends State<MyRegister> {
   final database = FirebaseDatabase.instance;
-  // final krishnaref = database.child('/email');
-
   // final AuthService _auth = AuthService();
   final formKey = GlobalKey<FormState>();
 
@@ -37,7 +35,7 @@ class _MyRegisterState extends State<MyRegister> {
   Future<void> addUser() async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     final FirebaseAuth auth = FirebaseAuth.instance;
-    final String? uid = auth.currentUser?.uid.toString();
+    final String? uid = auth.currentUser?.email;
     await users.doc(uid).set({
       'date': DateTime.now(),
     });
@@ -65,7 +63,7 @@ class _MyRegisterState extends State<MyRegister> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.cyan[900],
+        backgroundColor: Colors.blue[100],
         body: SingleChildScrollView(
           padding: EdgeInsets.all(22.0),
           child: Form(
@@ -77,19 +75,20 @@ class _MyRegisterState extends State<MyRegister> {
                   height: 70,
                 ),
                 CircleAvatar(
+                  backgroundColor: Colors.transparent,
                   radius: 60.0,
-                  child: Image.asset('assets/images/mymoney_logo.png'),
+                  child: Image.asset('assets/images/logo.jpg'),
                 ),
                 SizedBox(
                   height: 45.0,
                 ),
                 Text(
-                  'Welcome to MyMoney',
+                  'Save More with MyMoney',
                   style: TextStyle(
                     fontFamily: 'CrimsonText',
                     // fontStyle: FontStyle.italic,
                     fontSize: 30.0,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(
@@ -97,7 +96,7 @@ class _MyRegisterState extends State<MyRegister> {
                 ),
                 TextFormField(
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 20.0,
                   ),
                   controller: nameController,
@@ -105,7 +104,7 @@ class _MyRegisterState extends State<MyRegister> {
                   decoration: InputDecoration(
                     labelText: "Name",
                     labelStyle:
-                        TextStyle(color: Colors.white38, fontSize: 18.0),
+                        TextStyle(color: Colors.black54, fontSize: 18.0),
                   ),
                 ),
                 SizedBox(
@@ -113,11 +112,11 @@ class _MyRegisterState extends State<MyRegister> {
                 ),
                 TextFormField(
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 20.0,
                   ),
                   controller: emailController,
-                  cursorColor: Colors.white,
+                  cursorColor: Colors.black,
                   textInputAction: TextInputAction.next,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (email) =>
@@ -127,7 +126,7 @@ class _MyRegisterState extends State<MyRegister> {
                   decoration: InputDecoration(
                     labelText: "Email",
                     labelStyle:
-                        TextStyle(color: Colors.white38, fontSize: 18.0),
+                        TextStyle(color: Colors.black54, fontSize: 18.0),
                   ),
                 ),
                 SizedBox(
@@ -135,7 +134,7 @@ class _MyRegisterState extends State<MyRegister> {
                 ),
                 TextFormField(
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 20.0,
                   ),
                   controller: passwordController,
@@ -149,7 +148,7 @@ class _MyRegisterState extends State<MyRegister> {
                   decoration: InputDecoration(
                     labelText: "Password",
                     labelStyle:
-                        TextStyle(color: Colors.white38, fontSize: 18.0),
+                        TextStyle(color: Colors.black54, fontSize: 18.0),
                   ),
                 ),
                 SizedBox(
@@ -161,7 +160,7 @@ class _MyRegisterState extends State<MyRegister> {
                   child: ElevatedButton.icon(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Colors.lightGreen[600]),
+                          MaterialStateProperty.all(Colors.blue[900]),
                     ),
                     onPressed: () {
                       signUp();
@@ -184,7 +183,7 @@ class _MyRegisterState extends State<MyRegister> {
                   children: [
                     Text(
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontFamily: 'CrimsonText',
                           fontSize: 16),
                       'Already have an account?   ',
@@ -197,7 +196,7 @@ class _MyRegisterState extends State<MyRegister> {
                         'Log In',
                         style: TextStyle(
                           decoration: TextDecoration.underline,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontFamily: 'CrimsonText',
                           fontSize: 16,
                           fontStyle: FontStyle.italic,

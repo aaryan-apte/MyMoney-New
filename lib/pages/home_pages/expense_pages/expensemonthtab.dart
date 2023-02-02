@@ -109,40 +109,40 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
     return sum;
   });
 
-  // getBudgetandExpense () {
-  //   FirebaseFirestore.instance
-  //       .collection(FirestoreBuckets.users)
-  //       .doc(getEmail())
-  //       .collection(FirestoreBuckets.dates)
-  //       .doc(dateToday)
-  //       .collection(FirestoreBuckets.expenses)
-  //       .get()
-  //       .then((querySnapshot){
-  //     num sum = 0;
-  //     querySnapshot.docs.forEach((element) {
-  //       num value = element.data()[FirestoreBuckets.expense];
-  //       sum += value;
-  //     });
-  //     expense = sum;
-  //   }).then((value) => {
-  //     FirebaseFirestore.instance
-  //         .collection(FirestoreBuckets.users)
-  //         .doc(getEmail())
-  //         .collection(FirestoreBuckets.budgets)
-  //         .get()
-  //         .then((querySnapshot){
-  //       num sum = 0;
-  //       querySnapshot.docs.forEach((element) {
-  //         print(element.data());
-  //         num value = element.data()[FirestoreBuckets.budget];
-  //         sum += value;
-  //       });
-  //       budget = sum;
-  //       print("$budget   hehehehe    $expense");
-  //     })
-  //   });
-  //
-  // }
+  getBudgetandExpense () {
+    FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(getEmail())
+        .collection(FirestoreBuckets.dates)
+        .doc(dateToday)
+        .collection(FirestoreBuckets.expenses)
+        .get()
+        .then((querySnapshot){
+      num sum = 0;
+      querySnapshot.docs.forEach((element) {
+        num value = element.data()[FirestoreBuckets.expense];
+        sum += value;
+      });
+      expense = sum;
+    }).then((value) => {
+      FirebaseFirestore.instance
+          .collection(FirestoreBuckets.users)
+          .doc(getEmail())
+          .collection(FirestoreBuckets.budgets)
+          .get()
+          .then((querySnapshot){
+        num sum = 0;
+        querySnapshot.docs.forEach((element) {
+          print(element.data());
+          num value = element.data()[FirestoreBuckets.budget];
+          sum += value;
+        });
+        budget = sum;
+        print("$budget   hehehehe    $expense");
+      })
+    });
+
+  }
 
   Future<void> getBudget(String category) async {
     var userMonth = FirebaseFirestore.instance
@@ -220,7 +220,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                       margin: const EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.green,
+                        color: Colors.blue[100],
                       ),
                       child: FutureBuilder(
                         future: _future,
@@ -231,7 +231,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                             style: const TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w300,
-                                color: Colors.white),
+                                color: Colors.black),
                           ),
                         ),
                       ),
@@ -246,7 +246,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
               child: Container(
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Colors.blueGrey[800],
+                  color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(17.0),
                 ),
                 width: double.infinity,
@@ -290,8 +290,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                               // expenseDay = expenseDay + expense;
                               return Container(
                                 height: 65.0,
-                                margin: const EdgeInsets.only(
-                                    top: 8.0, left: 6.0, right: 6.0),
+                                margin: const EdgeInsets.only(top: 16.0, left: 14.0, right: 14.0),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
                                     color: Colors.white),

@@ -20,10 +20,10 @@ class _BudgetCategoryState extends State<BudgetCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
-        title: const Text("Select the category"),
+        backgroundColor: Colors.blue[900],
+        title: const Text("Select the category", style: TextStyle(fontSize: 25.0),),
       ),
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.blue[900],
       body: Container(
         child: Column(
           children: [
@@ -37,183 +37,186 @@ class _BudgetCategoryState extends State<BudgetCategory> {
                 ),
               ),*/
             const SizedBox(height: 20),
-            Container(
-              height: 648,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(50),
-                  topLeft: Radius.circular(50),
+            Expanded(
+              child: Container(
+                height: 648,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(50),
+                    topLeft: Radius.circular(50),
+                  ),
                 ),
-              ),
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Center(
-                      child: Text(
-                        "Pick up a Category",
-                        style:
-                            TextStyle(color: Color(0xffe91e63), fontSize: 20),
-                      ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 30.0,),
+                    // const Padding(
+                    //   padding: EdgeInsets.all(10.0),
+                    //   child: Center(
+                    //     child: Text(
+                    //       "Pick up a Category",
+                    //       style:
+                    //           TextStyle(color: Colors.black, fontSize: 20),
+                    //     ),
+                    //   ),
+                    // ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/online-shopping.png',
+                              'Shopping',
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/grocery-cart.png',
+                              'Grocery',
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/dining.png',
+                              'Dining',
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/bill.png',
+                              'Bills',
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/online-shopping.png',
-                            'Shopping',
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/biofuel.png',
+                              'Fuel',
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/grocery-cart.png',
-                            'Grocery',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/headphone.png',
+                              'Gadgets',
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/dining.png',
-                            'Dining',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/profits.png',
+                              'Investment',
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/bill.png',
-                            'Bills',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/appliances.png',
+                              'Household',
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/biofuel.png',
-                            'Fuel',
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/children.png',
+                              'Kids',
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/headphone.png',
-                            'Gadgets',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/bag.png',
+                              'Office',
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/profits.png',
-                            'Investment',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/home.png',
+                              'House Rent',
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/appliances.png',
-                            'Household',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/destination.png',
+                              'Travel',
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/children.png',
-                            'Kids',
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                                'assets/expense_icons/golf-player.png',
+                                'Leisure'),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/bag.png',
-                            'Office',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                              'assets/expense_icons/sparkle.png',
+                              'Grooming',
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/home.png',
-                            'House Rent',
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
+                                'assets/expense_icons/heartbeat.png', 'Health'),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/destination.png',
-                            'Travel',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                              'assets/expense_icons/golf-player.png',
-                              'Leisure'),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                            'assets/expense_icons/sparkle.png',
-                            'Grooming',
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
-                              'assets/expense_icons/heartbeat.png', 'Health'),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconGenerator(
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: IconGenerator(
     'assets/expense_icons/metro.png', 'Transport')
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

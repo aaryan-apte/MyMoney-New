@@ -119,7 +119,7 @@ class _IncomePageState extends State<IncomePage>
     _sum();
     late int incomeToPass;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue[100],
       body: Container(
         child: StreamBuilder<DocumentSnapshot>(
             stream: incomeData,
@@ -133,9 +133,11 @@ class _IncomePageState extends State<IncomePage>
                 );
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator(
-                  backgroundColor: Colors.white,
-                  color: Colors.blue[900],
+                return Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                    color: Colors.blue[900],
+                  ),
                 );
               }
               Map<String, dynamic> docData =
@@ -151,7 +153,7 @@ class _IncomePageState extends State<IncomePage>
                       margin: const EdgeInsets.all(14.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.lightGreen[700],
+                        color: Colors.white,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(14.0),
@@ -166,12 +168,12 @@ class _IncomePageState extends State<IncomePage>
                             const Text(
                               "Income",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 20.0),
+                                  color: Colors.black, fontSize: 20.0),
                             ),
                             Text(
                               "₹$income",
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 20.0),
+                                  color: Colors.black, fontSize: 20.0),
                             ),
                           ],
                         ),
@@ -182,7 +184,7 @@ class _IncomePageState extends State<IncomePage>
                       margin: const EdgeInsets.all(14.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.lightGreen[700],
+                        color: Colors.white,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(14.0),
@@ -197,12 +199,12 @@ class _IncomePageState extends State<IncomePage>
                             const Text(
                               "Savings Till Date",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 20.0),
+                                  color: Colors.black, fontSize: 20.0),
                             ),
                             Text(
                               "₹$totalSavings",
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 20.0),
+                                  color: Colors.black, fontSize: 20.0),
                             ),
                           ],
                         ),

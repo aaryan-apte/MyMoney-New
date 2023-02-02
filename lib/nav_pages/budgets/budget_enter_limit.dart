@@ -110,12 +110,12 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          "Enter monthly limit for this category",
+        backgroundColor: Colors.blue[900],
+        title: Text(
+          "Enter monthly limit for $budgetCategoryAdd",
           style: TextStyle(
-            color: Colors.lightBlueAccent,
-            fontSize: 10,
+            color: Colors.white,
+            fontSize: 22,
           ),
         ),
       ),
@@ -166,7 +166,7 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
               ),*/
       body: Container(
         //height: 650,
-        decoration: const BoxDecoration(color: Colors.orange),
+        decoration: BoxDecoration(color: Colors.blue[900]),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
@@ -237,8 +237,8 @@ class _EnterBudgetAmountState extends State<EnterBudgetAmount> {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                child: const Text("SET BUDGET",
-                    style: TextStyle(fontSize: 25.0, color: Colors.purple)),
+                child: Text("SET BUDGET",
+                    style: TextStyle(fontSize: 25.0, color: Colors.blue[900], fontWeight: FontWeight.w600)),
               ),
             ),
           ],
