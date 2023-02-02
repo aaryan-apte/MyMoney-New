@@ -144,24 +144,22 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
   //
   // }
 
-  int getBudget(String category){
+  Future<void> getBudget(String category) async {
     var userMonth = FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
-        .doc(email)
-        .collection(FirestoreBuckets.dates)
-        .doc(DateTime.now().year.toString())
-        .collection(DateTime.now().month.toString())
-        .doc(FirestoreBuckets.expenses)
-        .collection(FirestoreBuckets.expenses)
-        .doc(category);
-    var userSnapshot = userMonth.get();
-    var incomeToPass = userSnapshot.then((value) {
-      if(value.data()![FirestoreBuckets.expense] != 0){
-        return value;
-    }
-    });
-    Map<String, dynamic> docData = {};
-    return 0;
+        .doc(email).collection(FirestoreBuckets.budgets).doc(category);
+    var userSnapshot = await userMonth.get();
+    var docData = userSnapshot.data();
+    print(docData![FirestoreBuckets.expense]);
+    // Map<String, dynamic> incomeToPass = userSnapshot.data as Map<String, dynamic>;
+    // print(incomeToPass[FirestoreBuckets.budget]);
+    // var incomeToPass = userSnapshot.then((value) {
+    //   if(value.data()![FirestoreBuckets.budget] != 0){
+    //     return value;
+    // }
+    // });
+    // Map<String, dynamic> docData = {};
+    // return 0;
   }
 
   // int getExpenseDay(){
@@ -252,8 +250,8 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                   borderRadius: BorderRadius.circular(17.0),
                 ),
                 width: double.infinity,
-                child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
+                child: FutureBuilder(
+                  future: FirebaseFirestore.instance
                       .collection(FirestoreBuckets.users)
                       .doc(email)
                       .collection(FirestoreBuckets.dates)
@@ -319,7 +317,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                                             fontSize: 22.0,
                                             color: Colors.black),
                                       ),
-                                      Text(getBudget(category).toString()),
+                                      // Text(getBudget(category).toString()),
                                       //const SizedBox(width: 18.0),
                                       Text(
                                         "₹$expense",

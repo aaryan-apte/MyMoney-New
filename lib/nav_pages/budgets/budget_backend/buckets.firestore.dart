@@ -16,4 +16,6 @@ class FirestoreBuckets {
   static const String goals = "goals";
   static const String totalSavings = "totalSavings";
   static const String incomeDocument = "incomeDocument";
+
+  static const String category = "category";
 }

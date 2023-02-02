@@ -112,7 +112,9 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
         .collection(FirestoreBuckets.users)
         .doc(getEmail())
         .collection(FirestoreBuckets.dates)
-        .doc(dateToday)
+        .doc(DateTime.now().year.toString())
+        .collection(DateTime.now().month.toString())
+    .doc()
         .collection(FirestoreBuckets.expenses)
         .get()
         .then((querySnapshot){
