@@ -250,8 +250,8 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                   borderRadius: BorderRadius.circular(17.0),
                 ),
                 width: double.infinity,
-                child: FutureBuilder(
-                  future: FirebaseFirestore.instance
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
                       .collection(FirestoreBuckets.users)
                       .doc(email)
                       .collection(FirestoreBuckets.dates)

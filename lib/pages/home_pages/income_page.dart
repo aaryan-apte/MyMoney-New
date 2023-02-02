@@ -26,6 +26,41 @@ class _IncomePageState extends State<IncomePage>
 
   late final Stream<DocumentSnapshot<Map<String, dynamic>>> incomeData;
   // late final incomeData1;
+  num sum = 0;
+
+  final String? email = FirebaseAuth.instance.currentUser?.email;
+  Future<void> _sum() async => FirebaseFirestore.instance
+          .collection(FirestoreBuckets.users)
+          .doc(email)
+          .collection(FirestoreBuckets.dates)
+          .doc(DateTime.now().year.toString())
+          .collection(DateTime.now().month.toString())
+          .doc(FirestoreBuckets.expenses)
+          .collection(FirestoreBuckets.expenses)
+          .get()
+          .then((querySnapshot) {
+        // num sum = 0;
+        querySnapshot.docs.forEach((element) {
+          num value = element.data()[FirestoreBuckets.expense];
+          sum += value;
+        });
+
+        print(sum);
+
+        Map<String, dynamic> map1 = {"income": income, "totalSavings": sum};
+
+        var doc1 = FirebaseFirestore.instance
+            .collection(FirestoreBuckets.users)
+            .doc(email)
+            .collection(FirestoreBuckets.income)
+            .doc(FirestoreBuckets.incomeDocument);
+
+        try {
+          doc1.set(map1);
+        } catch (e) {
+          print(e);
+        }
+      });
 
   @override
   void initState() {
@@ -46,10 +81,8 @@ class _IncomePageState extends State<IncomePage>
     try {
       incomeData1.get().then((doc) async {
         if (doc.exists == false) {
-          await incomeData1.set({
-            FirestoreBuckets.income: 0,
-            FirestoreBuckets.totalSavings: 0
-          });
+          await incomeData1.set(
+              {FirestoreBuckets.income: 0, FirestoreBuckets.totalSavings: 0});
           // await incomeData1.set({
           //   FirestoreBuckets.income: 0,
           //   FirestoreBuckets.totalSavings: 0
@@ -83,6 +116,7 @@ class _IncomePageState extends State<IncomePage>
 
   @override
   Widget build(BuildContext context) {
+    _sum();
     late int incomeToPass;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -98,15 +132,18 @@ class _IncomePageState extends State<IncomePage>
                   ),
                 );
               }
-              if(snapshot.connectionState == ConnectionState.waiting){
-                return CircularProgressIndicator(backgroundColor: Colors.white, color: Colors.blue[900],);
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  color: Colors.blue[900],
+                );
               }
               Map<String, dynamic> docData =
                   snapshot.data!.data() as Map<String, dynamic>;
               if (docData.isNotEmpty) {
                 income = docData[FirestoreBuckets.income];
                 incomeToPass = income;
-                totalSavings = docData[FirestoreBuckets.totalSavings];
+                totalSavings = income - int.parse(docData[FirestoreBuckets.totalSavings].toString());
                 return Column(
                   children: [
                     Container(
