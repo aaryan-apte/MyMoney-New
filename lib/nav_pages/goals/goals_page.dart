@@ -84,7 +84,7 @@ class _GoalsPageState extends State<GoalsPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => const GoalEntry()))
+                                    builder: (context) => GoalEntry()))
                           },
                       child: Row(
                         children: [
@@ -95,7 +95,7 @@ class _GoalsPageState extends State<GoalsPage> {
                               color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
-                             // fontStyle: FontStyle.italic,
+                              // fontStyle: FontStyle.italic,
                             ),
                           )
                         ],
@@ -103,9 +103,7 @@ class _GoalsPageState extends State<GoalsPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             /*Container(
               child: Text("Your Goals", style: TextStyle(
                   color: Colors.black,
@@ -133,12 +131,14 @@ class _GoalsPageState extends State<GoalsPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextButton(
                     onPressed: () => {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Your_Goal()))
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Your_Goal()))
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         //Image.asset('assets/goals_icons/target.png'),
                         Text(
                           'Existing Goals ',

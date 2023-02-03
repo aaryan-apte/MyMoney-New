@@ -2,6 +2,7 @@
 
 // ignore_for_file: unnecessary_brace_in_string_interps
 
+import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -203,6 +204,34 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
     return map1[categoryName];
   }
 
+  int getBudgetAmount(String category) {
+    var path = FirebaseFirestore.instance
+        .collection(FirestoreBuckets.users)
+        .doc(email)
+        .collection(FirestoreBuckets.budgets)
+        .doc(category);
+    int budgetGot = 0;
+    int temp = 0;
+
+    Map<String, dynamic>? map1 = {};
+
+    path.get().then((doc) => {
+          if (doc.exists == true)
+            {
+              // return path[FirestoreBuckets.budget];
+              map1 = doc.data(),
+              budgetGot = map1![FirestoreBuckets.budget],
+              temp = budgetGot,
+              // print("Budget for $category received: $budgetGot"),
+    // return budgetGot;
+            }
+        });
+
+    budgetGot = temp;
+    print("Budget for $category received: $budgetGot");
+    return budgetGot;
+  }
+
   @override
   Widget build(BuildContext context) {
     final String? email = FirebaseAuth.instance.currentUser?.email;
@@ -218,7 +247,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                 const SizedBox(height: 10.0),
                 Container(
                   margin: const EdgeInsets.all(10.0),
-                  padding: const EdgeInsets.all(50),
+                  padding: const EdgeInsets.all(40),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: Colors.blue[100],
@@ -310,6 +339,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                             String category =
                                 docData[FirestoreBuckets.categoryName];
                             int expense = docData[FirestoreBuckets.expense];
+                            int budgetMonth = getBudgetAmount(category);
                             if (expense == 0) {
                               return Container();
                             }
@@ -334,14 +364,15 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                                       width: 40.0,
                                       child: Image.asset(imageRoute(category)!),
                                     ),
-                                    // const SizedBox(width: 20.0),
+                                    Text(budgetMonth.toString()),
+                                    // ListTile(
+                                    //
+                                    // ),
                                     Text(
                                       category,
                                       style: const TextStyle(
                                           fontSize: 22.0, color: Colors.black),
                                     ),
-                                    // Text(getBudget(category).toString()),
-                                    //const SizedBox(width: 18.0),
                                     Text(
                                       "₹$expense",
                                       textAlign: TextAlign.end,

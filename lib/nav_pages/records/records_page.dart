@@ -93,119 +93,121 @@ class _RecordPageState extends State<RecordPage> {
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 30),
-            Container(
-              margin: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.blue[100],
-                borderRadius: BorderRadius.circular(17.0),
-              ),
-              width: double.infinity,
-              child: StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection(FirestoreBuckets.users)
-                    .doc(email)
-                    .collection(FirestoreBuckets.dates)
-                    .doc((DateTime.now().year.toString()))
-                    .collection(DateTime.now().month.toString())
-                    .doc(datePicked)
-                    .collection(FirestoreBuckets.expenses)
-                    .snapshots(),
-                builder: (context,
-                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                        snapshot) {
-                  print(datePicked.toString());
-                  if (snapshot.hasData && snapshot.data != null) {
-                    print("Total Documents: ${snapshot.data!.docs.length}");
-                    if (snapshot.data!.docs.isNotEmpty) {
-                      return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, int index) {
-                          Map<String, dynamic> docData =
-                              snapshot.data!.docs[index].data();
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: BorderRadius.circular(17.0),
+                ),
+                width: double.infinity,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection(FirestoreBuckets.users)
+                      .doc(email)
+                      .collection(FirestoreBuckets.dates)
+                      .doc((DateTime.now().year.toString()))
+                      .collection(DateTime.now().month.toString())
+                      .doc(datePicked)
+                      .collection(FirestoreBuckets.expenses)
+                      .snapshots(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    print(datePicked.toString());
+                    if (snapshot.hasData && snapshot.data != null) {
+                      print("Total Documents: ${snapshot.data!.docs.length}");
+                      if (snapshot.data!.docs.isNotEmpty) {
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, int index) {
+                            Map<String, dynamic> docData =
+                                snapshot.data!.docs[index].data();
 
-                          if (docData.isEmpty) {
-                            return const Text(
-                              "Document is Empty",
-                              textAlign: TextAlign.center,
+                            if (docData.isEmpty) {
+                              return const Text(
+                                "Document is Empty",
+                                textAlign: TextAlign.center,
+                              );
+                            }
+                            String category =
+                                docData[FirestoreBuckets.categoryName];
+                            int expense = docData[FirestoreBuckets.expense];
+                            // bool check = true;
+
+                            // for(int i = 0; i < list1.length; i++){
+                            //   if(category == list1[i]){
+                            //
+                            //   }
+                            // }
+                            // expenseDay = expenseDay + expense;
+                            if (expense == 0) {
+                              return Container();
+                            }
+                            return Container(
+                              height: 65.0,
+                              width: double.infinity,
+                              margin: const EdgeInsets.only(
+                                  top: 18.0, left: 13.0, right: 13.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 17.0,
+                                  right: 17.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      child: Image.asset(imageRoute(category)!),
+                                    ),
+                                    // const SizedBox(width: 20.0),
+                                    Text(
+                                      category,
+                                      style: const TextStyle(
+                                          fontSize: 22.0, color: Colors.black),
+                                    ),
+                                    //const SizedBox(width: 18.0),
+                                    Text(
+                                      "₹$expense",
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          fontSize: 24.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
+                              ),
                             );
-                          }
-                          String category =
-                              docData[FirestoreBuckets.categoryName];
-                          int expense = docData[FirestoreBuckets.expense];
-                          // bool check = true;
-
-                          // for(int i = 0; i < list1.length; i++){
-                          //   if(category == list1[i]){
-                          //
-                          //   }
-                          // }
-                          // expenseDay = expenseDay + expense;
-                          if (expense == 0) {
-                            return Container();
-                          }
-                          return Container(
-                            height: 65.0,
-                            width: double.infinity,
-                            margin: const EdgeInsets.only(
-                                top: 18.0, left: 13.0, right: 13.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 17.0,
-                                right: 17.0,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Image.asset(imageRoute(category)!),
-                                  ),
-                                  // const SizedBox(width: 20.0),
-                                  Text(
-                                    category,
-                                    style: const TextStyle(
-                                        fontSize: 22.0, color: Colors.black),
-                                  ),
-                                  //const SizedBox(width: 18.0),
-                                  Text(
-                                    "₹$expense",
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        fontSize: 24.0,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                          },
+                        );
+                      } else {
+                        return Center(
+                          child: Text(
+                            'There are no records for $datePicked',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19.0),
+                          ),
+                        );
+                      }
                     } else {
-                      return Center(
-                        child: Text(
-                          'There are no records for $datePicked',
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 19.0),
-                        ),
+                      return const Center(
+                        child: Text("Getting Error"),
                       );
                     }
-                  } else {
-                    return const Center(
-                      child: Text("Getting Error"),
-                    );
-                  }
-                },
+                  },
+                ),
               ),
             ),
           ],

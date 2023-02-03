@@ -4,6 +4,7 @@ import 'package:my_money/pages//home_pages/home_page.dart';
 import 'package:my_money/nav_pages/records/records_page.dart';
 import 'package:my_money/nav_pages/budget/budgets_page.dart';
 import 'package:my_money/nav_pages/goals/goals_page.dart';
+import 'package:my_money/pages/signup/logout.dart';
 
 Color PrimaryColor = Color(0xff3f51b5);
 
@@ -20,6 +21,7 @@ class _MainPageState extends State<MainPage> {
     RecordPage(),
     BudgetPage(),
     GoalsPage(),
+    LogOut(),
   ];
 
   int currindex = 0;
@@ -58,6 +60,7 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
                 label: ("Budgets"), icon: Icon(Icons.calculate)),
             BottomNavigationBarItem(label: ("Goals"), icon: Icon(Icons.games)),
+            BottomNavigationBarItem(label: ("Logout"), icon: Icon(Icons.power_settings_new_rounded))
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_money/nav_pages/budgets/budget_backend/buckets.firestore.dart';
 // import 'package:my_money/nav_pages/goals/goals_page.dart';
 // import 'package:my_money/nav_pages/budgets/budget_enter_limit.dart';
 
@@ -19,14 +20,10 @@ class _GoalEntryState extends State<GoalEntry> {
     TextEditingController targetAmount = TextEditingController();
     TextEditingController savedAmount = TextEditingController();
 
-    Future<void> addGoal() async {
+    void addGoal() async {
       final goalNameAdd = goalName.text.trim();
       final targetAmountAdd = int.parse(targetAmount.text.trim());
       final savedAmountAdd = int.parse(savedAmount.text.trim());
-
-      CollectionReference user1 =
-          FirebaseFirestore.instance.collection('users');
-
 
       Map<String, dynamic> map1 = {
         "goalName": goalNameAdd,
@@ -38,11 +35,12 @@ class _GoalEntryState extends State<GoalEntry> {
       final String? uid = auth.currentUser!.email;
 
       try {
-        await user1
-            .doc(uid.toString())
-            .collection('goals')
+        FirebaseFirestore.instance
+            .collection(FirestoreBuckets.users)
+            .doc(uid)
+            .collection(FirestoreBuckets.goals)
             .add(map1)
-            .then((value) => print("Success"));
+            .then((value) => print("GoalName: $goalNameAdd\nTarget Amount: $targetAmountAdd\nSaved Already: $savedAmountAdd"));
         // await user1
         //     .doc(uid.toString())
         //     .collection('goals')
@@ -55,7 +53,10 @@ class _GoalEntryState extends State<GoalEntry> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('             New Goal', style:  TextStyle(fontSize: 24.0),),
+        title: const Text(
+          '             New Goal',
+          style: TextStyle(fontSize: 24.0),
+        ),
         backgroundColor: Colors.blue[900],
       ),
       body: Container(
@@ -124,34 +125,36 @@ class _GoalEntryState extends State<GoalEntry> {
                     bottomLeft: Radius.circular(60),
                   ),
                 ),
-                child: Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextButton(
-                      onPressed: () => {
-                        // Map <String, int> goalData = {};
-                        Navigator.pushNamed(context, 'goalpage')
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset('assets/goals_icons/target.png'),
-                          TextButton(
-                            child: const Text(
-                              ' SAVE GOAL ',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  //fontStyle: FontStyle.italic
-                              ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    onPressed: () => {
+                      // Map <String, int> goalData = {};
+                      Navigator.pushNamed(context, 'goalpage'),
+                      Navigator.pop(context),
+                      Navigator.pop(context),
+                    },
+                    child: Row(
+                      children: [
+                        Image.asset('assets/goals_icons/target.png'),
+                        TextButton(
+                          child: const Text(
+                            ' SAVE GOAL ',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              //fontStyle: FontStyle.italic
                             ),
-                            onPressed: () {
-                              addGoal();
-                              Navigator.pushNamed(context, 'goalpage');
-                            },
-                          )
-                        ],
-                      ),
+                          ),
+                          onPressed: () {
+                            addGoal();
+                            Navigator.pop(context);
+                            // Navigator.pop(context);
+                            // Navigator.pushNamed(context, 'goalpage');
+                          },
+                        )
+                      ],
                     ),
                   ),
                 ),

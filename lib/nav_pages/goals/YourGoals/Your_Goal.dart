@@ -15,6 +15,7 @@ class Your_Goal extends StatefulWidget {
 }
 
 class _Your_GoalState extends State<Your_Goal> {
+
   String? getEmail() {
     FirebaseAuth auth = FirebaseAuth.instance;
     String? uid = auth.currentUser!.email;
@@ -51,7 +52,7 @@ class _Your_GoalState extends State<Your_Goal> {
               .doc(getEmail())
               .collection(FirestoreBuckets.goals)
               .snapshots(),
-          builder: (___,
+          builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
               print("Total Documents: ${snapshot.data!.docs.length}");

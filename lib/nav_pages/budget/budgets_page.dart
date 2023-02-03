@@ -119,151 +119,157 @@ class _BudgetPageState extends State<BudgetPage> {
                       fontStyle: FontStyle.normal)),
             ),
             const SizedBox(height: 10),
-            Container(
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.blue[100],
-                borderRadius: BorderRadius.circular(17.0),
-              ),
-              width: double.infinity,
-              child: StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection(FirestoreBuckets.users)
-                    .doc(getEmail())
-                    .collection(FirestoreBuckets.budgets)
-                    .snapshots(),
-                builder: (___,
-                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                        snapshot) {
-                  if (snapshot.hasData && snapshot.data != null) {
-                    print("Total Documents: ${snapshot.data!.docs.length}");
-                    if (snapshot.data!.docs.isNotEmpty) {
-                      return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, int index) {
-                          Map<String, dynamic> docData =
-                              snapshot.data!.docs[index].data();
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: BorderRadius.circular(17.0),
+                ),
+                width: double.infinity,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection(FirestoreBuckets.users)
+                      .doc(getEmail())
+                      .collection(FirestoreBuckets.budgets)
+                      .snapshots(),
+                  builder: (___,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.hasData && snapshot.data != null) {
+                      print("Total Documents: ${snapshot.data!.docs.length}");
+                      if (snapshot.data!.docs.isNotEmpty) {
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, int index) {
+                            Map<String, dynamic> docData =
+                                snapshot.data!.docs[index].data();
 
-                          if (docData.isEmpty) {
-                            return const Text(
-                              "Document is Empty",
-                              textAlign: TextAlign.center,
-                            );
-                          }
-                          String category =
-                              docData[FirestoreBuckets.categoryName];
-                          int budget = docData[FirestoreBuckets.budget];
-                          return Container(
-                            height: 65.0,
-                            margin: const EdgeInsets.only(
-                                top: 16.0, left: 14.0, right: 14.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 13.0, right: 13.0),
-                              child: Row(
-                                mainAxisAlignment:
+                            if (docData.isEmpty) {
+                              return const Text(
+                                "Document is Empty",
+                                textAlign: TextAlign.center,
+                              );
+                            }
+                            String category =
+                                docData[FirestoreBuckets.categoryName];
+                            int budget = docData[FirestoreBuckets.budget];
+                            if(budget != 0){
+                              return Container(
+                                height: 65.0,
+                                margin: const EdgeInsets.only(
+                                    top: 16.0, left: 14.0, right: 14.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    color: Colors.white),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 13.0, right: 13.0),
+                                  child: Row(
+                                    mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 40.0,
-                                    width: 40.0,
-                                    child: Image.asset(imageRoute(category)!),
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 40.0,
+                                        width: 40.0,
+                                        child: Image.asset(imageRoute(category)!),
+                                      ),
+                                      // const SizedBox(width: 20.0),
+                                      Text(
+                                        category,
+                                        style: const TextStyle(fontSize: 22.0),
+                                      ),
+                                      //const SizedBox(width: 18.0),
+                                      Text(
+                                        "₹$budget",
+                                        textAlign: TextAlign.end,
+                                        style: const TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w500),
+                                      )
+                                    ],
                                   ),
-                                  // const SizedBox(width: 20.0),
-                                  Text(
-                                    category,
-                                    style: const TextStyle(fontSize: 22.0),
-                                  ),
-                                  //const SizedBox(width: 18.0),
-                                  Text(
-                                    "₹$budget",
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        fontSize: 24.0,
-                                        fontWeight: FontWeight.w500),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                          //
-                          // String category = docData[FirestoreBuckets.categoryName];
-                          // int budget = docData[FirestoreBuckets.budget];
-                          // return Column(
-                          //   children: [
-                          //     Padding(
-                          //       padding: const EdgeInsets.only(
-                          //         top: 15.0,
-                          //         left: 13.0,
-                          //         right: 13.0,
-                          //       ),
-                          //       child: Row(
-                          //         children: [
-                          //           Container(
-                          //             height: 70.0,
-                          //             width: double.infinity,
-                          //             decoration: BoxDecoration(
-                          //                 color: Colors.white,
-                          //                 borderRadius:
-                          //                 BorderRadius.circular(15.0)),
-                          //             child: Padding(
-                          //               padding: const EdgeInsets.all(10.0),
-                          //               child: Text(
-                          //                 category,
-                          //                 textAlign: TextAlign.center,
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           Container(
-                          //             height: 70.0,
-                          //             width: double.infinity,
-                          //             decoration: BoxDecoration(
-                          //                 color: Colors.white,
-                          //                 borderRadius:
-                          //                 BorderRadius.circular(15.0)),
-                          //             child: Padding(
-                          //               padding: const EdgeInsets.all(10.0),
-                          //               child: Text(
-                          //                 budget.toString(),
-                          //                 textAlign: TextAlign.center,
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ),
-                          //   ],
-                          // );
-                        },
+                                ),
+                              );
+                            } else{
+                              return Container();
+                            }
+                            //
+                            // String category = docData[FirestoreBuckets.categoryName];
+                            // int budget = docData[FirestoreBuckets.budget];
+                            // return Column(
+                            //   children: [
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(
+                            //         top: 15.0,
+                            //         left: 13.0,
+                            //         right: 13.0,
+                            //       ),
+                            //       child: Row(
+                            //         children: [
+                            //           Container(
+                            //             height: 70.0,
+                            //             width: double.infinity,
+                            //             decoration: BoxDecoration(
+                            //                 color: Colors.white,
+                            //                 borderRadius:
+                            //                 BorderRadius.circular(15.0)),
+                            //             child: Padding(
+                            //               padding: const EdgeInsets.all(10.0),
+                            //               child: Text(
+                            //                 category,
+                            //                 textAlign: TextAlign.center,
+                            //               ),
+                            //             ),
+                            //           ),
+                            //           Container(
+                            //             height: 70.0,
+                            //             width: double.infinity,
+                            //             decoration: BoxDecoration(
+                            //                 color: Colors.white,
+                            //                 borderRadius:
+                            //                 BorderRadius.circular(15.0)),
+                            //             child: Padding(
+                            //               padding: const EdgeInsets.all(10.0),
+                            //               child: Text(
+                            //                 budget.toString(),
+                            //                 textAlign: TextAlign.center,
+                            //               ),
+                            //             ),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ],
+                            // );
+                          },
 
-                        // separatorBuilder: (___, ____) {
-                        //   return const Divider();
-                        // },
-                        // itemCount: snapshot.data!.docs.length,
-                      );
+                          // separatorBuilder: (___, ____) {
+                          //   return const Divider();
+                          // },
+                          // itemCount: snapshot.data!.docs.length,
+                        );
+                      } else {
+                        return const Center(
+                          child: Text(
+                            "To start adding budgets, click on create budget!",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19.0),
+                          ),
+                        );
+                      }
                     } else {
                       return const Center(
-                        child: Text(
-                          "To start adding budgets, click on create budget!",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 19.0),
-                        ),
+                        child: Text("Getting Error"),
                       );
                     }
-                  } else {
-                    return const Center(
-                      child: Text("Getting Error"),
-                    );
-                  }
-                },
+                  },
+                ),
               ),
             ),
           ],

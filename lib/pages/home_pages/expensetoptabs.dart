@@ -43,7 +43,7 @@ class _ExpenseTopTabsState extends State<ExpenseTopTabs>
           backgroundColor: Colors.white,
           elevation: 0.0,
           title: TabBar(
-            padding: EdgeInsets.all(10),
+            
             controller: _tabController,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(

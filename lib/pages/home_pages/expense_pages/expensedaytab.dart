@@ -196,7 +196,7 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                 const SizedBox(height: 10.0),
                 Container(
                   margin: const EdgeInsets.all(10.0),
-                  padding: const EdgeInsets.all(50),
+                  padding: const EdgeInsets.all(40),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: Colors.blue[100],
@@ -342,14 +342,16 @@ class _ExpenseDayTabState extends State<ExpenseDayTab> {
                                 int expenseToPass = expense;
                                 String categoryToPass = category;
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AddExpense(
-                                              category: categoryToPass,
-                                              oldAmount: expenseToPass,
-                                              docID: docID,
-                                              date: dateToPass,
-                                            )));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddExpense(
+                                      category: categoryToPass,
+                                      oldAmount: expenseToPass,
+                                      docID: docID,
+                                      date: dateToPass,
+                                    ),
+                                  ),
+                                );
                               },
                             );
                           },

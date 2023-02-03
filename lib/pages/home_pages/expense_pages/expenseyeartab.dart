@@ -196,7 +196,7 @@ class _ExpenseYearTabState extends State<ExpenseYearTab> {
                 const SizedBox(height: 10.0),
                 Container(
                   margin: const EdgeInsets.all(10.0),
-                  padding: const EdgeInsets.all(50),
+                  padding: const EdgeInsets.all(40),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.0),
                     color: Colors.blue[100],
