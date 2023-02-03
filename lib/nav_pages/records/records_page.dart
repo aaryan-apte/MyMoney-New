@@ -55,7 +55,7 @@ class _RecordPageState extends State<RecordPage> {
     return Scaffold(
       backgroundColor: Colors.white70,
       appBar: AppBar(
-        title: const Center(child: Text('Records')),
+        title: const Center(child: Text('Records', style: TextStyle(fontSize: 27.0),)),
         backgroundColor: Colors.blue[900],
       ),
       body: Container(

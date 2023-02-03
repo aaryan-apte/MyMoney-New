@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../nav_pages/budgets/budget_backend/buckets.firestore.dart';
+import 'monthBudgetExpense.dart';
 // import 'addexpense.dart';
 
 class ExpenseMonthTab extends StatefulWidget {
@@ -204,14 +205,14 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
     return map1[categoryName];
   }
 
-  int getBudgetAmount(String category) {
+  int budgetGot = 0;
+
+  void getBudgetAmount(String category) {
     var path = FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
         .doc(email)
         .collection(FirestoreBuckets.budgets)
         .doc(category);
-    int budgetGot = 0;
-    int temp = 0;
 
     Map<String, dynamic>? map1 = {};
 
@@ -220,16 +221,16 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
             {
               // return path[FirestoreBuckets.budget];
               map1 = doc.data(),
-              budgetGot = map1![FirestoreBuckets.budget],
-              temp = budgetGot,
-              // print("Budget for $category received: $budgetGot"),
+              setState(() {
+    budgetGot = map1![FirestoreBuckets.budget];
+              }),
+
+              print("Budget for $category received: $budgetGot"),
     // return budgetGot;
             }
         });
+    // print("Budget for $category received: $budgetGot");
 
-    budgetGot = temp;
-    print("Budget for $category received: $budgetGot");
-    return budgetGot;
   }
 
   @override
@@ -318,6 +319,9 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                   builder: (___,
                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                           snapshot) {
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return Center(child: CircularProgressIndicator(),);
+                    }
                     if (snapshot.hasData && snapshot.data != null) {
                       print("Total Documents: ${snapshot.data!.docs.length}");
                       if (snapshot.data!.docs.isNotEmpty) {
@@ -325,9 +329,11 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: snapshot.data!.docs.length,
+                          // if(snapshot.connectionState)
                           itemBuilder: (context, int index) {
                             Map<String, dynamic> docData =
                                 snapshot.data!.docs[index].data();
+
 
                             if (docData.isEmpty) {
                               return const Text(
@@ -335,56 +341,18 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
                                 textAlign: TextAlign.center,
                               );
                             }
+
+
                             final documents = snapshot.data?.docs;
                             String category =
                                 docData[FirestoreBuckets.categoryName];
                             int expense = docData[FirestoreBuckets.expense];
-                            int budgetMonth = getBudgetAmount(category);
+
                             if (expense == 0) {
-                              return Container();
+                              return SizedBox();
                             }
-                            // expenseDay = expenseDay + expense;
-                            return Container(
-                              height: 65.0,
-                              margin: const EdgeInsets.only(
-                                  top: 16.0, left: 14.0, right: 14.0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.white),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 13.0, right: 13.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 40.0,
-                                      width: 40.0,
-                                      child: Image.asset(imageRoute(category)!),
-                                    ),
-                                    Text(budgetMonth.toString()),
-                                    // ListTile(
-                                    //
-                                    // ),
-                                    Text(
-                                      category,
-                                      style: const TextStyle(
-                                          fontSize: 22.0, color: Colors.black),
-                                    ),
-                                    Text(
-                                      "₹$expense",
-                                      textAlign: TextAlign.end,
-                                      style: const TextStyle(
-                                          fontSize: 24.0,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
+
+                            return MonthBudgetExpenseWidget(category: category, expense: expense.toString(), image: imageRoute(category)!);
                           },
                         );
                       } else {
@@ -413,3 +381,5 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
     );
   }
 }
+
+
