@@ -1,5 +1,7 @@
 // import 'dart:math';
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -91,25 +93,25 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
   final String? email = FirebaseAuth.instance.currentUser?.email;
 
   Future<num> _sum() async => FirebaseFirestore.instance
-      .collection(FirestoreBuckets.users)
-      .doc(email)
-      .collection(FirestoreBuckets.dates)
-      .doc(DateTime.now().year.toString())
-      .collection(DateTime.now().month.toString())
-      .doc(FirestoreBuckets.expenses)
-      .collection(FirestoreBuckets.expenses)
-      .get()
-      .then((querySnapshot) {
-    num sum = 0;
-    querySnapshot.docs.forEach((element) {
-      num value = element.data()[FirestoreBuckets.expense];
-      sum += value;
-    });
-    print(sum);
-    return sum;
-  });
+          .collection(FirestoreBuckets.users)
+          .doc(email)
+          .collection(FirestoreBuckets.dates)
+          .doc(DateTime.now().year.toString())
+          .collection(DateTime.now().month.toString())
+          .doc(FirestoreBuckets.expenses)
+          .collection(FirestoreBuckets.expenses)
+          .get()
+          .then((querySnapshot) {
+        num sum = 0;
+        querySnapshot.docs.forEach((element) {
+          num value = element.data()[FirestoreBuckets.expense];
+          sum += value;
+        });
+        print(sum);
+        return sum;
+      });
 
-  getBudgetandExpense () {
+  getBudgetandExpense() {
     FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
         .doc(getEmail())
@@ -117,7 +119,7 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
         .doc(dateToday)
         .collection(FirestoreBuckets.expenses)
         .get()
-        .then((querySnapshot){
+        .then((querySnapshot) {
       num sum = 0;
       querySnapshot.docs.forEach((element) {
         num value = element.data()[FirestoreBuckets.expense];
@@ -125,29 +127,30 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
       });
       expense = sum;
     }).then((value) => {
-      FirebaseFirestore.instance
-          .collection(FirestoreBuckets.users)
-          .doc(getEmail())
-          .collection(FirestoreBuckets.budgets)
-          .get()
-          .then((querySnapshot){
-        num sum = 0;
-        querySnapshot.docs.forEach((element) {
-          print(element.data());
-          num value = element.data()[FirestoreBuckets.budget];
-          sum += value;
-        });
-        budget = sum;
-        print("$budget   hehehehe    $expense");
-      })
-    });
-
+              FirebaseFirestore.instance
+                  .collection(FirestoreBuckets.users)
+                  .doc(getEmail())
+                  .collection(FirestoreBuckets.budgets)
+                  .get()
+                  .then((querySnapshot) {
+                num sum = 0;
+                querySnapshot.docs.forEach((element) {
+                  print(element.data());
+                  num value = element.data()[FirestoreBuckets.budget];
+                  sum += value;
+                });
+                budget = sum;
+                print("$budget   hehehehe    $expense");
+              })
+            });
   }
 
   Future<void> getBudget(String category) async {
     var userMonth = FirebaseFirestore.instance
         .collection(FirestoreBuckets.users)
-        .doc(email).collection(FirestoreBuckets.budgets).doc(category);
+        .doc(email)
+        .collection(FirestoreBuckets.budgets)
+        .doc(category);
     var userSnapshot = await userMonth.get();
     var docData = userSnapshot.data();
     print(docData![FirestoreBuckets.expense]);
@@ -209,129 +212,149 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Expanded(
-              flex: 2,
-              child: Column(
-                // controller: _tabController,
-                children: [
-                  const SizedBox(height: 10.0),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: Colors.blue[100],
-                      ),
-                      child: FutureBuilder(
-                        future: _future,
-                        builder: (context, snapshot) => Center(
-                          child: Text(
-                            'You\'ve spent ₹${snapshot.data}',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
+            Column(
+              // controller: _tabController,
+              children: [
+                const SizedBox(height: 10.0),
+                Container(
+                  margin: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(50),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.0),
+                    color: Colors.blue[100],
                   ),
-                  const SizedBox(height: 17.0),
-                ],
-              ),
+                  child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection(FirestoreBuckets.users)
+                          .doc(email)
+                          .collection(FirestoreBuckets.dates)
+                          .doc(DateTime.now().year.toString())
+                          .collection(DateTime.now().month.toString())
+                          .doc(FirestoreBuckets.expenses)
+                          .collection(FirestoreBuckets.expenses)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: Text(
+                              'You\'ve spent ₹--/--',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black),
+                            ),
+                          );
+                        } else {
+                          num sum = 0;
+                          for (var element in snapshot.data!.docs) {
+                            num value =
+                                element.data()[FirestoreBuckets.expense];
+                            sum += value;
+                          }
+                          return Center(
+                            child: Text(
+                              'You\'ve spent ₹${sum}',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.black),
+                            ),
+                          );
+                        }
+                      }),
+                ),
+                const SizedBox(height: 17.0),
+              ],
             ),
             Expanded(
-              flex: 5,
               child: Container(
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   color: Colors.blue[100],
                   borderRadius: BorderRadius.circular(17.0),
                 ),
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection(FirestoreBuckets.users)
                       .doc(email)
                       .collection(FirestoreBuckets.dates)
                       .doc(DateTime.now().year.toString())
-                      .collection(DateTime.now().month.toString()).doc(FirestoreBuckets.expenses)
+                      .collection(DateTime.now().month.toString())
+                      .doc(FirestoreBuckets.expenses)
                       .collection(FirestoreBuckets.expenses)
                       .snapshots(),
                   builder: (___,
                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                      snapshot) {
+                          snapshot) {
                     if (snapshot.hasData && snapshot.data != null) {
                       print("Total Documents: ${snapshot.data!.docs.length}");
                       if (snapshot.data!.docs.isNotEmpty) {
-                        return Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (context, int index) {
-                              Map<String, dynamic> docData =
-                              snapshot.data!.docs[index].data();
+                        return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, int index) {
+                            Map<String, dynamic> docData =
+                                snapshot.data!.docs[index].data();
 
-                              if (docData.isEmpty) {
-                                return const Text(
-                                  "Document is Empty",
-                                  textAlign: TextAlign.center,
-                                );
-                              }
-                              final documents = snapshot.data?.docs;
-                              String category =
-                              docData[FirestoreBuckets.categoryName];
-                              int expense = docData[FirestoreBuckets.expense];
-                              if(expense == 0){
-                                return Container();
-                              }
-                              // expenseDay = expenseDay + expense;
-                              return Container(
-                                height: 65.0,
-                                margin: const EdgeInsets.only(top: 16.0, left: 14.0, right: 14.0),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    color: Colors.white),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 13.0, right: 13.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 40.0,
-                                        width: 40.0,
-                                        child: Image.asset(
-                                            imageRoute(category)!),
-                                      ),
-                                      // const SizedBox(width: 20.0),
-                                      Text(
-                                        category,
-                                        style: const TextStyle(
-                                            fontSize: 22.0,
-                                            color: Colors.black),
-                                      ),
-                                      // Text(getBudget(category).toString()),
-                                      //const SizedBox(width: 18.0),
-                                      Text(
-                                        "₹$expense",
-                                        textAlign: TextAlign.end,
-                                        style: const TextStyle(
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black),
-                                      )
-                                    ],
-                                  ),
-                                ),
+                            if (docData.isEmpty) {
+                              return const Text(
+                                "Document is Empty",
+                                textAlign: TextAlign.center,
                               );
-                            },
-                          ),
+                            }
+                            final documents = snapshot.data?.docs;
+                            String category =
+                                docData[FirestoreBuckets.categoryName];
+                            int expense = docData[FirestoreBuckets.expense];
+                            if (expense == 0) {
+                              return Container();
+                            }
+                            // expenseDay = expenseDay + expense;
+                            return Container(
+                              height: 65.0,
+                              margin: const EdgeInsets.only(
+                                  top: 16.0, left: 14.0, right: 14.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.white),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 13.0, right: 13.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 40.0,
+                                      width: 40.0,
+                                      child: Image.asset(imageRoute(category)!),
+                                    ),
+                                    // const SizedBox(width: 20.0),
+                                    Text(
+                                      category,
+                                      style: const TextStyle(
+                                          fontSize: 22.0, color: Colors.black),
+                                    ),
+                                    // Text(getBudget(category).toString()),
+                                    //const SizedBox(width: 18.0),
+                                    Text(
+                                      "₹$expense",
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          fontSize: 24.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         );
                       } else {
                         return const Center(

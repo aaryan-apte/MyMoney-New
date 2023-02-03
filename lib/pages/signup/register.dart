@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
@@ -25,6 +25,7 @@ class _MyRegisterState extends State<MyRegister> {
   final database = FirebaseDatabase.instance;
   // final AuthService _auth = AuthService();
   final formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -41,20 +42,45 @@ class _MyRegisterState extends State<MyRegister> {
     });
   }
 
-  Future signUp() async {
+  void signUp() {
     final isValid = formKey.currentState!.validate();
     if (isValid == false) {
       return;
     }
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
-    Authenticate2();
+
+    setState(() {
+      _isLoading = true;
+    });
+    // try {
+    //   await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    //       email: emailController.text.trim(),
+    //       password: passwordController.text.trim());
+    // } on FirebaseAuthException catch (e) {
+    //   print(e);
+    // }
+    FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim())
+        .then((userCreds) {
+      addUser().then((value) {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Account Created Successfully!")));
+        Future.delayed(const Duration(seconds: 2), () {
+          ScaffoldMessenger.of(context).clearSnackBars();
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Authenticate2()));
+        });
+      });
+    }).onError((error, stackTrace) {
+      setState(() {
+        _isLoading = false;
+      });
+      throw "error";
+    });
   }
 
   @override
@@ -164,15 +190,23 @@ class _MyRegisterState extends State<MyRegister> {
                     ),
                     onPressed: () {
                       signUp();
-                      addUser();
                     },
                     icon: Icon(Icons.lock_open_rounded),
-                    label: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        fontSize: 24.0,
-                      ),
-                    ),
+                    label: _isLoading
+                        ? SizedBox(
+                            height: MediaQuery.of(context).size.width / 12,
+                            width: MediaQuery.of(context).size.width / 12,
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.white,
+                              strokeWidth: 1,
+                            ),
+                          )
+                        : Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              fontSize: 24.0,
+                            ),
+                          ),
                   ),
                 ),
                 SizedBox(

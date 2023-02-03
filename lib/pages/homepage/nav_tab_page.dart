@@ -34,29 +34,32 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     // final user = FirebaseAuth.instance.currentUser!;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: pages[currindex],
-      bottomNavigationBar: BottomNavigationBar(
-        unselectedFontSize: 0,
-        //selectedFontSize: 0,
-        type: BottomNavigationBarType.fixed,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
         backgroundColor: Colors.white,
-        onTap: onTap,
-        currentIndex: currindex,
-        selectedItemColor: Colors.black54,
-        unselectedItemColor: Colors.grey.withOpacity(0.5),
-        showUnselectedLabels: false,
-        //showSelectedLabels: false,
-        elevation: 0,
-        items: const [
-          BottomNavigationBarItem(label: ("Home"), icon: Icon(Icons.home)),
-          BottomNavigationBarItem(
-              label: ("Records"), icon: Icon(Icons.newspaper)),
-          BottomNavigationBarItem(
-              label: ("Budgets"), icon: Icon(Icons.calculate)),
-          BottomNavigationBarItem(label: ("Goals"), icon: Icon(Icons.games)),
-        ],
+        body: pages[currindex],
+        bottomNavigationBar: BottomNavigationBar(
+          unselectedFontSize: 0,
+          //selectedFontSize: 0,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          onTap: onTap,
+          currentIndex: currindex,
+          selectedItemColor: Colors.black54,
+          unselectedItemColor: Colors.grey.withOpacity(0.5),
+          showUnselectedLabels: false,
+          //showSelectedLabels: false,
+          elevation: 0,
+          items: const [
+            BottomNavigationBarItem(label: ("Home"), icon: Icon(Icons.home)),
+            BottomNavigationBarItem(
+                label: ("Records"), icon: Icon(Icons.newspaper)),
+            BottomNavigationBarItem(
+                label: ("Budgets"), icon: Icon(Icons.calculate)),
+            BottomNavigationBarItem(label: ("Goals"), icon: Icon(Icons.games)),
+          ],
+        ),
       ),
     );
   }
