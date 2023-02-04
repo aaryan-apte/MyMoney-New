@@ -39,21 +39,91 @@ class _MonthBudgetExpenseWidgetState extends State<MonthBudgetExpenseWidget> {
 
     Map<String, dynamic>? map1 = {};
 
-    path.get().then((doc) => {
-          if (doc.exists == true)
-            {
-              map1 = doc.data(),
-              setState(() {
-                budgetGot = map1![FirestoreBuckets.budget].toString();
-              }),
-            }
-        });
+    path.get().then(
+          (doc) => {
+            if (doc.exists == true)
+              {
+                map1 = doc.data(),
+                setState(() {
+                  budgetGot = map1![FirestoreBuckets.budget].toString();
+                }),
+              }
+          },
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    if (int.parse(widget.expense) > int.parse(budgetGot)) {
+      return Container(
+        // height: 110.0,
+        margin: const EdgeInsets.only(top: 16.0, left: 14.0, right: 14.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.only(
+              top: 16.0, bottom: 16.0, left: 16.0, right: 16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 40.0,
+                    width: 40.0,
+                    child: Image.asset(widget.image),
+                  ),
+                  Text(
+                    widget.category,
+                    style: const TextStyle(fontSize: 22.0, color: Colors.black),
+                  ),
+                  const SizedBox(
+                    height: 40.0,
+                    width: 40.0,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "₹${widget.expense}",
+                    textAlign: TextAlign.end,
+                    style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
+                  Text(
+                    "Overspent by ₹${int.parse(widget.expense) - (int.parse(budgetGot))}",
+                    style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
+                  Text(
+                    "₹${budgetGot.toString()}",
+                    textAlign: TextAlign.end,
+                    style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
+                ],
+              ),
+              // SizedBox(height: 15.0),
+            ],
+          ),
+        ),
+      );
+    }
 
+    return Container(
       // height: 110.0,
       margin: const EdgeInsets.only(top: 16.0, left: 14.0, right: 14.0),
       decoration: BoxDecoration(

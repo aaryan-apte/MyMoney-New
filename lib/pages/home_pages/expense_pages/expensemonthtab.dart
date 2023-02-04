@@ -45,51 +45,6 @@ class _ExpenseMonthTabState extends State<ExpenseMonthTab> {
     });
   }
 
-  // int getExpenseDay() {
-  //   // super.initState();
-  //   int expenseDay = 0;
-  //   var stream1 = FirebaseFirestore.instance
-  //       .collection(FirestoreBuckets.users)
-  //       .doc(getEmail())
-  //       .collection(FirestoreBuckets.dates)
-  //       .doc(dateToday)
-  //       .collection(FirestoreBuckets.expenses)
-  //       .snapshots()
-  //       .listen((snap) {
-  //     final dateDocs = snap.docs.map((doc) => doc.data());
-  //
-  //     for (var dateData in dateDocs) {
-  //       if (dateData[FirestoreBuckets.expense] > 0) {
-  //         expenseDay =
-  //             expenseDay + int.parse(dateData[FirestoreBuckets.expense]);
-  //       }
-  //     }
-  //   });
-  //   return expenseDay;
-  // }
-
-  // Future<num> _sum() async => await FirebaseFirestore.instance
-  //     .collection(FirestoreBuckets.users)
-  //     .doc(getEmail())
-  //     .collection(FirestoreBuckets.dates)
-  //     .doc(dateToday)
-  //     .collection(FirestoreBuckets.expenses)
-  //     .get()
-  //     .then((querySnapshot) async {
-  //   num sum = 0.0;
-  //   querySnapshot.docs.forEach((element) async {
-  //     // here I want to sum
-  //     querySnapshot.docs.forEach((element) async {
-  //       num value = element.data()[FirestoreBuckets.expense];
-  //       sum = sum + value;
-  //     });
-  //     print(sum);
-  //   }
-  //   );
-  //   return sum;
-  // }
-  // );
-
   late num expense;
   late num budget;
   final String? email = FirebaseAuth.instance.currentUser?.email;
