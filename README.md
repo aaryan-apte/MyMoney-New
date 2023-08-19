@@ -48,7 +48,6 @@
 - [App APK Link](https://drive.google.com/file/d/1CujDob4VR2ak-n9U7zX_bi7S2oTYz_m6/view?usp=share_link)
 - [Hosted Backend Link](https://console.firebase.google.com/u/0/project/mymoney-23/firestore/data/~2Fusers)
 
-Add any more links/resources you used for your project
 
 ## 🤖Tech-Stack
 
@@ -74,7 +73,7 @@ Fully implemented features in this project
 
 Partially implemented features in this project
 
-- [] ML model for analyzing expenditure patterns yet to be integrated.
+- ML model for analyzing expenditure patterns yet to be integrated.
 
 ## 🔮Future Scope
 
@@ -118,7 +117,6 @@ Partially implemented features in this project
 ## 📱Screenshots
 
 Screenshots of our app:
-
 
 <img src="https://drive.google.com/uc?id=1A0U1-U8k49OMfu2Nu6FevQxExReame7M" height="320" width="150">
 <img src="https://drive.google.com/uc?id=1sRmwTkRigYz3DeWewkSaSHgFYM-UYYGQ" height="320" width="150">
