@@ -9,7 +9,6 @@
 <div align="center">
    <strong>My Money</strong> - A Personal Finance Management Application<br>
   CoC Inheritance 2022 || Brainiacs <br> <br>
-  Add any <a href="https://shields.io/">Shields</a> here
 </div>
 <hr>
 
